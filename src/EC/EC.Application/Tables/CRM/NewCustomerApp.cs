@@ -10,7 +10,10 @@ namespace EC.Application.Tables.CRM
     using EC.DataAccess.CRM;
     using EC.Entity;
     using EC.Entity.Enum;
+    using EC.Entity.Parameter.Request.CRM;
     using EC.Entity.Parameter.Request.NewCRM;
+    using EC.Entity.Tables.CRM;
+    using EC.Entity.Tables.Finance;
     using EC.Libraries.Core;
     using EC.Libraries.Util;
 
@@ -20,6 +23,7 @@ namespace EC.Application.Tables.CRM
     public class NewCustomerApp : Base<NewCustomerApp>
     {
 		private const int interval = 10;
+
 		// <summary>
         /// 下一个等级
         /// </summary>
@@ -73,7 +77,7 @@ namespace EC.Application.Tables.CRM
                 }
 
                 //代理销售验证
-                var upgradeGrades =agencySales.Where(p => p.Grade == nestGrade).ToList();
+                var upgradeGrades =agencySales.Where(p => p.Grade == nestGrade).OrderBy(p=>p.Sort).ToList();
                 if (upgradeGrades.Count != grade.Top){
                     throw new Exception("代理销售等级错误");
                 }
@@ -83,12 +87,155 @@ namespace EC.Application.Tables.CRM
                     throw new Exception("升级基金不足");
                 }
 
+                //获取所有推荐人
+                var referrerTop = GetReferrer(customers, new List<ParentIds>(), customer.ReferrerSysNo, grade.Top,1);
+                //批量更新上层
+                var batchUpgradeParentList = new List<BatchUpgradeParent>();
+                //批量添加奖金日志对象
+                var batchInertBonusLogList = new List<FnBonusLog>();
+                foreach (var item in referrerTop)
+                { 
+                    var referrer = upgradeGrades.FirstOrDefault(p=>p.Sort == item.Sort);
 
+                    //钱包
+                    var walletAmount = item.Grade >= grade.Type ? referrer.Amount : referrer.Amount / 2;
+                    var batchUpgradeParent = new BatchUpgradeParent(){
+                        CustomerSysNo = item.CustomerSysNo,
+                        WalletAmount = walletAmount,
+                        SettledBonus20 = 0,
+                        SettledBonus30 = 0,
+                        SettledBonus40 = 0,
+                        SettledBonus50 = 0,
+                        SettledBonus60 = 0,
+                        SettledBonus70 = 0,
+                        SettledBonus80 = 0,
+                        SettledBonus90 = 0
+                    };
+                    if (item.Grade < grade.Type)
+                    {
+
+                        //设置待结算
+                        //SettledBonus(batchUpgradeParent, grade.Type, walletAmount);
+                        batchUpgradeParentList.Add(batchUpgradeParent);
+                    }
+                    else {
+                        batchUpgradeParentList.Add(batchUpgradeParent);
+                    }
+                }
             }
-            catch (Exception ex) { 
-            
+            catch (Exception ex) {
+                result.Message = ex.Message;
             }
             return result;
+        }
+
+        /// <summary>
+        /// 待结算字段设置
+        /// </summary>
+        /// <param name="batchUpgradeParent"></param>
+        /// <param name="grade">升级级别</param>
+        /// <param name="bonus">奖金</param>
+        /// <param name="batchUpgradeParent"></param>
+        private void SettledBonus(BatchUpgradeParent batchUpgradeParent, int grade, decimal bonus)
+        {
+            switch (grade)
+            {
+                case 10:
+                    batchUpgradeParent.SettledBonus10 = bonus;
+                    break;
+                case 20:
+                    batchUpgradeParent.SettledBonus20 = bonus;
+                    break;
+                case 30:
+                    batchUpgradeParent.SettledBonus30 = bonus;
+                    break;
+                case 40:
+                    batchUpgradeParent.SettledBonus40 = bonus;
+                    break;
+                case 50:
+                    batchUpgradeParent.SettledBonus50 = bonus;
+                    break;
+                case 60:
+                    batchUpgradeParent.SettledBonus60 = bonus;
+                    break;
+                case 70:
+                    batchUpgradeParent.SettledBonus70 = bonus;
+                    break;
+                case 80:
+                    batchUpgradeParent.SettledBonus80 = bonus;
+                    break;
+                case 90:
+                    batchUpgradeParent.SettledBonus90 = bonus;
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// 获取升级推荐人列表
+        /// </summary>
+        /// <param name="customers">所有会员</param>
+        /// <param name="parentIds">推荐人列表</param>
+        /// <param name="referrerSysNo">推荐编号</param>
+        /// <param name="sort">排序</param>
+        public List<ParentIds> GetReferrer(IList<CrCustomer> customers, List<ParentIds> parentIds, int referrerSysNo,int sort = 1)
+        {
+            var customer = customers.FirstOrDefault(p => p.SysNo.Equals(referrerSysNo));
+            if (customer != null)
+            {
+                parentIds.Add(new ParentIds()
+                {
+                    CustomerSysNo = customer.SysNo,
+                    RealName = customer.RealName,
+                    Grade = customer.Grade,
+                    Sort = sort,
+                    ReferrerSysNo = customer.ReferrerSysNo,
+                    OpenId = customer.OpenId,
+                    WalletAmount = customer.WalletAmount,
+                    UpgradeFundAmount = customer.UpgradeFundAmount,
+                    GeneralBonus = customer.GeneralBonus,
+                    AreaBonus = customer.AreaBonus,
+                    GlobalBonus = customer.GlobalBonus
+                });
+                sort++;
+                return GetReferrer(customers, parentIds, customer.ReferrerSysNo, sort);
+            }
+            return parentIds;
+        }
+
+        /// <summary>
+        /// 获取升级推荐人列表
+        /// </summary>
+        /// <param name="customersList">所有会员</param>
+        /// <param name="parentIds">推荐人列表</param>
+        /// <param name="referrerSysNo">推荐编号</param>
+        /// <param name="layer">获取上级层数</param>
+        /// <param name="sort">排序</param>
+        /// <returns>List<ParentIds></returns>
+        public List<ParentIds> GetReferrer(IList<CrCustomer> customersList, List<ParentIds> parentIds, int referrerSysNo, int layer, int sort = 1)
+        {
+            var customer = customersList.FirstOrDefault(p => p.SysNo.Equals(referrerSysNo));
+            if (customer != null)
+            {
+                parentIds.Add(new ParentIds()
+                {
+                    CustomerSysNo = customer.SysNo,
+                    RealName = customer.RealName,
+                    Grade = customer.Grade,
+                    Sort = sort,
+                    ReferrerSysNo = customer.ReferrerSysNo,
+                    OpenId = customer.OpenId,
+                    WalletAmount = customer.WalletAmount,
+                    UpgradeFundAmount = customer.UpgradeFundAmount,
+                    GeneralBonus = customer.GeneralBonus,
+                    AreaBonus = customer.AreaBonus,
+                    GlobalBonus = customer.GlobalBonus
+                });
+                if (sort.Equals(layer))
+                    return parentIds;
+                sort++;
+                return GetReferrer(customersList, parentIds, customer.ReferrerSysNo, layer, sort);
+            }
+            return parentIds;
         }
     }
 }
