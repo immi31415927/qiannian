@@ -1,0 +1,4 @@
+dotnet new mvc -o EC.Web -f netcoreapp2.1
+dotnet new classlib -f netcoreapp2.1 -o SuiNing.Entity
+dotnet new classlib -n Light.Repository //创建一个名字为Light.Repository的.NET Standard类库
+dotnet new mvc -n MvcDemo netcoreapp2.1

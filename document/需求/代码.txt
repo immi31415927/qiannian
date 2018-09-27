@@ -1,0 +1,1 @@
+[{"Type":10,Name:"普通会员","Amount":0,Content:"普通会员","ExpiresDay":0},{"Type":20,Name:"普通代理","Amount":200,Content:"普通代理资格（100元）","ExpiresDay0":0},{"Type":30,Name:"区域代理","Amount":300,Content:"区域代理资格（100元）","ExpiresDay":0},{"Type":40,Name:"全国代理","Amount":600,Content:"全国代理资格（100元）","ExpiresDay":0},{"Type":50,Name:"股东","Amount":1800,Content:"","ExpiresDay":0}]

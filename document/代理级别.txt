@@ -1,0 +1,91 @@
+[
+{"Type":10,Name:"普通会员","Amount":0,"Top":0},
+{"Type":20,Name:"一星代理","Amount":200,"Top":0},
+{"Type":30,Name:"二星代理","Amount":300,"Top":0},
+{"Type":40,Name:"三星代理","Amount":400,"Top":0},
+{"Type":50,Name:"四星代理","Amount":600,"Top":0},
+{"Type":60,Name:"五星代理","Amount":800,"Top":0},
+{"Type":70,Name:"六星代理","Amount":1200,"Top":0},
+{"Type":80,Name:"七星代理","Amount":1600,"Top":0},
+{"Type":90,Name:"八星代理","Amount":2000,"Top":0}
+]
+
+
+[{"Type":10,Name:"普通会员","Amount":0,"Top":0},{"Type":20,Name:"一星代理","Amount":200,"Top":1},{"Type":30,Name:"二星代理","Amount":300,"Top":3},{"Type":40,Name:"三星代理","Amount":400,"Top":5},{"Type":50,Name:"四星代理","Amount":600,"Top":7},{"Type":60,Name:"五星代理","Amount":800,"Top":9},{"Type":70,Name:"六星代理","Amount":1200,"Top":11},{"Type":80,Name:"七星代理","Amount":1600,"Top":13},{"Type":90,Name:"八星代理","Amount":2000,"Top":15}]
+
+[{Grade:20,Bonus:200,Sort:1},{Grade:30,Bonus:200,Sort:1},{Grade:30,Bonus:50,Sort:2},{Grade:30,Bonus:50,Sort:3},{Grade:40,Bonus:200,Sort:1},{Grade:40,Bonus:50,Sort:2},{Grade:40,Bonus:50,Sort:3},{Grade:40,Bonus:50,Sort:4},{Grade:40,Bonus:50,Sort:5},{Grade:50,Bonus:200,Sort:1},{Grade:50,Bonus:100,Sort:2},{Grade:50,Bonus:100,Sort:3},{Grade:50,Bonus:50,Sort:4},{Grade:50,Bonus:50,Sort:5},{Grade:50,Bonus:50,Sort:6},{Grade:50,Bonus:50,Sort:7},{Grade:60,Bonus:200,Sort:1},{Grade:60,Bonus:100,Sort:2},{Grade:60,Bonus:100,Sort:3},{Grade:60,Bonus:100,Sort:4},{Grade:60,Bonus:100,Sort:5},{Grade:60,Bonus:50,Sort:6},{Grade:60,Bonus:50,Sort:7},{Grade:60,Bonus:50,Sort:8},{Grade:60,Bonus:50,Sort:9},{Grade:70,Bonus:400,Sort:1},{Grade:70,Bonus:100,Sort:2},{Grade:70,Bonus:100,Sort:3},{Grade:70,Bonus:100,Sort:4},{Grade:70,Bonus:100,Sort:5},{Grade:70,Bonus:100,Sort:6},{Grade:70,Bonus:100,Sort:7},{Grade:70,Bonus:50,Sort:8},{Grade:70,Bonus:50,Sort:9},{Grade:70,Bonus:50,Sort:10},{Grade:70,Bonus:50,Sort:11},{Grade:80,Bonus:400,Sort:1},{Grde:80,Bonus:200,Sort:2},{Grade:80,Bonus:200,Sort:3},{Grade:80,Bonus:100,Sort:4},{Grade:80,Bonus:100,Sort:5},{Grade:80,Bonus:100,Sort:6},{Grade:80,Bonus:100,Sort:7},{Grade:80,Bonus:100,Sort:8},{Grade:80,Bonus:100,Sort:9},{Grade:80,Bonus:50,Sort:10},{Grade:80,Bonus:50,Sort:11},{Grade:80,Bonus:50,Sort:12},{Grade:80,Bonus:50,Sort:13},{Grade:90,Bonus:400,Sort:1},{Grade:90,Bonus:200,Sort:2},{Grade:90,Bonus:200,Sort:3},{Grade:90,Bonus:200,Sort:4},{Grade:90,Bonus:200,Sort:5},{Grade:90,Bonus:100,Sort:6},{Grade:90,Bonus:100,Sort:7},{Grade:90,Bonus:100,Sort:8},{Grade:90,Bonus:100,Sort:9},{Grade:90,Bonus:100,Sort:10},{Grade:90,Bonus:100,Sort:11},{Grade:90,Bonus:50,Sort:12},{Grade:90,Bonus:50,Sort:13},{Grade:90,Bonus:50,Sort:14},{Grade:90,Bonus:50,Sort:15}]
+
+[
+	//升级一星代理
+	{Grade:20,Bonus:200,Sort:1},
+	//升级二星代理
+	{Grade:30,Bonus:200,Sort:1},
+	{Grade:30,Bonus:50,Sort:2},
+	{Grade:30,Bonus:50,Sort:3},
+	//升级三星代理
+	{Grade:40,Bonus:200,Sort:1},
+	{Grade:40,Bonus:50,Sort:2},
+	{Grade:40,Bonus:50,Sort:3},
+	{Grade:40,Bonus:50,Sort:4},
+	{Grade:40,Bonus:50,Sort:5},
+	//升级四星代理
+	{Grade:50,Bonus:200,Sort:1},
+	{Grade:50,Bonus:100,Sort:2},
+	{Grade:50,Bonus:100,Sort:3},
+	{Grade:50,Bonus:50,Sort:4},
+	{Grade:50,Bonus:50,Sort:5},
+	{Grade:50,Bonus:50,Sort:6},
+	{Grade:50,Bonus:50,Sort:7},
+	//升级五星代理
+	{Grade:60,Bonus:200,Sort:1},
+	{Grade:60,Bonus:100,Sort:2},
+	{Grade:60,Bonus:100,Sort:3},
+	{Grade:60,Bonus:100,Sort:4},
+	{Grade:60,Bonus:100,Sort:5},
+	{Grade:60,Bonus:50,Sort:6},
+	{Grade:60,Bonus:50,Sort:7},
+	{Grade:60,Bonus:50,Sort:8},
+	{Grade:60,Bonus:50,Sort:9},
+	//升级六星代理
+	{Grade:70,Bonus:400,Sort:1},
+	{Grade:70,Bonus:100,Sort:2},
+	{Grade:70,Bonus:100,Sort:3},
+	{Grade:70,Bonus:100,Sort:4},
+	{Grade:70,Bonus:100,Sort:5},
+	{Grade:70,Bonus:100,Sort:6},
+	{Grade:70,Bonus:100,Sort:7},
+	{Grade:70,Bonus:50,Sort:8},
+	{Grade:70,Bonus:50,Sort:9},
+	{Grade:70,Bonus:50,Sort:10},
+	{Grade:70,Bonus:50,Sort:11},
+	//升级七星代理
+	{Grade:80,Bonus:400,Sort:1},
+	{Grade:80,Bonus:200,Sort:2},
+	{Grade:80,Bonus:200,Sort:3},
+	{Grade:80,Bonus:100,Sort:4},
+	{Grade:80,Bonus:100,Sort:5},
+	{Grade:80,Bonus:100,Sort:6},
+	{Grade:80,Bonus:100,Sort:7},
+	{Grade:80,Bonus:100,Sort:8},
+	{Grade:80,Bonus:100,Sort:9},
+	{Grade:80,Bonus:50,Sort:10},
+	{Grade:80,Bonus:50,Sort:11},
+	{Grade:80,Bonus:50,Sort:12},
+	{Grade:80,Bonus:50,Sort:13},
+	//升级八星代理
+	{Grade:90,Bonus:400,Sort:1},
+	{Grade:90,Bonus:200,Sort:2},
+	{Grade:90,Bonus:200,Sort:3},
+	{Grade:90,Bonus:200,Sort:4},
+	{Grade:90,Bonus:200,Sort:5},
+	{Grade:90,Bonus:100,Sort:6},
+	{Grade:90,Bonus:100,Sort:7},
+	{Grade:90,Bonus:100,Sort:8},
+	{Grade:90,Bonus:100,Sort:9},
+	{Grade:90,Bonus:100,Sort:10},
+	{Grade:90,Bonus:100,Sort:11},
+	{Grade:90,Bonus:50,Sort:12},
+	{Grade:90,Bonus:50,Sort:13},
+	{Grade:90,Bonus:50,Sort:14},
+	{Grade:90,Bonus:50,Sort:15}
+]
