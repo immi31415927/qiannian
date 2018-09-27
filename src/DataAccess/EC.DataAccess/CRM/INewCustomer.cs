@@ -24,8 +24,7 @@ namespace EC.DataAccess.CRM
         /// <summary>
         /// 获取会员列表
         /// </summary>
-        /// <param name="request">查询参数</param>
         /// <returns>会员扩展信息列表</returns>
-        IList<CrCustomer> GetList(NewCustomerQuery query);
+        IList<CrCustomer> GetAll();
     }
 }

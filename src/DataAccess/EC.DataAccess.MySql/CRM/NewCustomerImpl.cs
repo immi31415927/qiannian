@@ -34,14 +34,12 @@ namespace EC.DataAccess.MySql.CRM
         /// <summary>
         /// 获取会员列表
         /// </summary>
-        /// <param name="request">查询参数</param>
         /// <returns>会员扩展信息列表</returns>
-        public IList<CrCustomer> GetList(NewCustomerQuery query)
+        public IList<CrCustomer> GetAll()
         {
             var sql = "select * from crcustomer;";
 
-            return DBContext.Sql(sql)
-                .QueryMany<CrCustomer>();
+            return DBContext.Sql(sql).QueryMany<CrCustomer>();
         }
     }
 }
