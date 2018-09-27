@@ -99,6 +99,7 @@ namespace EC.Application.Tables.CRM
 
                     //钱包
                     var walletAmount = item.Grade >= grade.Type ? referrer.Amount : referrer.Amount / 2;
+
                     var batchUpgradeParent = new BatchUpgradeParent(){
                         CustomerSysNo = item.CustomerSysNo,
                         WalletAmount = walletAmount,
@@ -111,6 +112,7 @@ namespace EC.Application.Tables.CRM
                         SettledBonus80 = 0,
                         SettledBonus90 = 0
                     };
+
                     if (item.Grade < grade.Type)
                     {
 
