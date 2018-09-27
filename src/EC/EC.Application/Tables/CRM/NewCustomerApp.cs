@@ -10,6 +10,7 @@ namespace EC.Application.Tables.CRM
     using EC.DataAccess.CRM;
     using EC.Entity;
     using EC.Entity.Enum;
+    using EC.Entity.Output.Fore;
     using EC.Entity.Parameter.Request.CRM;
     using EC.Entity.Parameter.Request.NewCRM;
     using EC.Entity.Tables.CRM;
@@ -93,6 +94,9 @@ namespace EC.Application.Tables.CRM
                 var batchUpgradeParentList = new List<BatchUpgradeParent>();
                 //批量添加奖金日志对象
                 var batchInertBonusLogList = new List<FnBonusLog>();
+                //微信提示
+                var weiXinTipList = new List<WeiXinTip>();
+
                 foreach (var item in referrerTop)
                 { 
                     var referrer = upgradeGrades.FirstOrDefault(p=>p.Sort == item.Sort);
@@ -100,27 +104,33 @@ namespace EC.Application.Tables.CRM
                     //钱包
                     var walletAmount = item.Grade >= grade.Type ? referrer.Amount : referrer.Amount / 2;
 
-                    var batchUpgradeParent = new BatchUpgradeParent(){
-                        CustomerSysNo = item.CustomerSysNo,
-                        WalletAmount = walletAmount,
-                        SettledBonus20 = 0,
-                        SettledBonus30 = 0,
-                        SettledBonus40 = 0,
-                        SettledBonus50 = 0,
-                        SettledBonus60 = 0,
-                        SettledBonus70 = 0,
-                        SettledBonus80 = 0,
-                        SettledBonus90 = 0
-                    };
 
                     if (item.Grade < grade.Type)
                     {
-
+                        var thatReferrerAll =GetReferrer(customers, new List<ParentIds>(), item.CustomerSysNo, 1);
+                        if (thatReferrerAll.Count > 0)
+                        {
+                            this.Find(batchUpgradeParentList, batchInertBonusLogList,weiXinTipList, thatReferrerAll, grade, item.Sort);
+                        }
                         //设置待结算
                         //SettledBonus(batchUpgradeParent, grade.Type, walletAmount);
-                        batchUpgradeParentList.Add(batchUpgradeParent);
+                        //batchUpgradeParentList.Add(batchUpgradeParent);
                     }
                     else {
+                        var batchUpgradeParent = new BatchUpgradeParent()
+                        {
+                            CustomerSysNo = item.CustomerSysNo,
+                            WalletAmount = walletAmount,
+                            SettledBonus20 = 0,
+                            SettledBonus30 = 0,
+                            SettledBonus40 = 0,
+                            SettledBonus50 = 0,
+                            SettledBonus60 = 0,
+                            SettledBonus70 = 0,
+                            SettledBonus80 = 0,
+                            SettledBonus90 = 0
+                        };
+
                         batchUpgradeParentList.Add(batchUpgradeParent);
                     }
                 }
@@ -129,6 +139,19 @@ namespace EC.Application.Tables.CRM
                 result.Message = ex.Message;
             }
             return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="batchUpgradeParent"></param>
+        /// <param name="bonusLog"></param>
+        /// <param name="weixinTip"></param>
+        /// <param name="thatReferrerAll"></param>
+        /// <param name="grade"></param>
+        /// <param name="sort"></param>
+        private void Find(List<BatchUpgradeParent> batchUpgradeParent,List<FnBonusLog> bonusLog,List<WeiXinTip> weixinTip, List<ParentIds> thatReferrerAll,Grade grade, int sort)
+        {
         }
 
         /// <summary>
