@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9D905D99-476D-4FE6-9B13-809D7BA388B1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EC.DataAccess.MySql</RootNamespace>
+    <AssemblyName>EC.DataAccess.MySql</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Bs\BsAuthorizeImpl.cs" />
+    <Compile Include="Bs\BsCodeImpl.cs" />
+    <Compile Include="Bs\BsLogImpl.cs" />
+    <Compile Include="Bs\BsMenuImpl.cs" />
+    <Compile Include="Bs\BsMenuPermissionImpl.cs" />
+    <Compile Include="Bs\BsNoticeImpl.cs" />
+    <Compile Include="Bs\BsPermissionImpl.cs" />
+    <Compile Include="Bs\BsRoleImpl.cs" />
+    <Compile Include="Bs\BsUserImpl.cs" />
+    <Compile Include="Bs\BsUserRoleImpl.cs" />
+    <Compile Include="Bs\SMSImpl.cs" />
+    <Compile Include="CRM\CrAgencyImpl.cs" />
+    <Compile Include="CRM\CrCustomerExtImpl.cs" />
+    <Compile Include="CRM\CrCustomerImpl.cs" />
+    <Compile Include="CRM\CrRecommendImpl.cs" />
+    <Compile Include="CRM\NewCustomerImpl.cs" />
+    <Compile Include="Fn\FnBonusLogImpl.cs" />
+    <Compile Include="Fn\FnCashoutImpl.cs" />
+    <Compile Include="Fn\FnRechargeImpl.cs" />
+    <Compile Include="Fn\FnStockAccountImpl.cs" />
+    <Compile Include="Fn\FnStockRecordImpl.cs" />
+    <Compile Include="Fn\FnTradeLogImpl.cs" />
+    <Compile Include="Fore\VideoCategoryImpl.cs" />
+    <Compile Include="Fore\VideoRecordImpl.cs" />
+    <Compile Include="Fore\VideoImpl.cs" />
+    <Compile Include="Fore\VideoItemImpl.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\EC\EC.Entity\EC.Entity.csproj">
+      <Project>{2d1497eb-ab53-480c-a37f-87f9941b3e0d}</Project>
+      <Name>EC.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\EC.Libraries.Core\EC.Libraries.Core.csproj">
+      <Project>{87c45a44-5be9-4f1f-8711-a649f981d4d3}</Project>
+      <Name>EC.Libraries.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EC.DataAccess\EC.DataAccess.csproj">
+      <Project>{b125f758-3145-4528-8629-44635a80468e}</Project>
+      <Name>EC.DataAccess</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

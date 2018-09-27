@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2D1497EB-AB53-480C-A37F-87F9941B3E0D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EC.Entity</RootNamespace>
+    <AssemblyName>EC.Entity</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppPage.cs" />
+    <Compile Include="AuthCode.cs" />
+    <Compile Include="Caching\CacheKeys.cs" />
+    <Compile Include="Common.cs" />
+    <Compile Include="Constant.cs" />
+    <Compile Include="Enum\AgencyEnum.cs" />
+    <Compile Include="Enum\AuthorizeEnum.cs" />
+    <Compile Include="Enum\CodeEnum.cs" />
+    <Compile Include="Enum\CommonEnum.cs" />
+    <Compile Include="Enum\CustomerEnum.cs" />
+    <Compile Include="Enum\FnEnum.cs" />
+    <Compile Include="Enum\ForeEnum.cs" />
+    <Compile Include="Enum\LogEnum.cs" />
+    <Compile Include="Enum\MenuEnum.cs" />
+    <Compile Include="Enum\NoticeEnum.cs" />
+    <Compile Include="Enum\PermissionEnum.cs" />
+    <Compile Include="Enum\RoleEnum.cs" />
+    <Compile Include="Enum\StockRecordEnum.cs" />
+    <Compile Include="Enum\TradeLogEnum.cs" />
+    <Compile Include="Enum\UserEnum.cs" />
+    <Compile Include="JResult.cs" />
+    <Compile Include="Output\Fore\VideoOutput.cs" />
+    <Compile Include="Output\Fore\WeiXinTip.cs" />
+    <Compile Include="PageCondition.cs" />
+    <Compile Include="Parameter\NewCustomer\NewCustomerQuery.cs" />
+    <Compile Include="Parameter\Request\Auth\MenuRequest.cs" />
+    <Compile Include="Parameter\Request\Auth\RoleQueryRequeest.cs" />
+    <Compile Include="Parameter\Request\Auth\SaveOrUpdateMenuRequest.cs" />
+    <Compile Include="Parameter\Request\Auth\TicketRequest.cs" />
+    <Compile Include="Parameter\Request\Auth\ZtreeNodes.cs" />
+    <Compile Include="Parameter\Request\Bs\AuthorizeRequest.cs" />
+    <Compile Include="Parameter\Request\Bs\LogRequest.cs" />
+    <Compile Include="Parameter\Request\Bs\MenuPermissionQueryRequeest.cs" />
+    <Compile Include="Parameter\Request\Bs\NoticeRequest.cs" />
+    <Compile Include="Parameter\Request\Bs\PermissionRequest.cs" />
+    <Compile Include="Parameter\Request\Bs\UserRequest.cs" />
+    <Compile Include="Parameter\Request\Bs\RoleSaveRequest.cs" />
+    <Compile Include="Parameter\Request\Bs\ZCheckTreeNode.cs" />
+    <Compile Include="Parameter\Request\CRM\CrAgencyQueryRequest.cs" />
+    <Compile Include="Parameter\Request\CRM\CustomerExtBatchRequest.cs" />
+    <Compile Include="Parameter\Request\CRM\CustomerRequest.cs" />
+    <Compile Include="Parameter\Request\CRM\MemberBindRequest.cs" />
+    <Compile Include="Parameter\Request\CRM\PasswordRequest.cs" />
+    <Compile Include="Parameter\Request\CRM\ProfileRequest.cs" />
+    <Compile Include="Parameter\Request\CRM\RecommendExtRequest.cs" />
+    <Compile Include="Parameter\Request\CRM\RegisteredSyncRequest.cs" />
+    <Compile Include="Parameter\Request\CRM\SalesAgencyBonus.cs" />
+    <Compile Include="Parameter\Request\CRM\SendSMSRequest.cs" />
+    <Compile Include="Parameter\Request\CRM\SendSMSResponse.cs" />
+    <Compile Include="Parameter\Request\CRM\SingleSyncRequest.cs" />
+    <Compile Include="Parameter\Request\CRM\UpdateExpiresTimeRequest.cs" />
+    <Compile Include="Parameter\Request\CRM\UpdateHeadRequest.cs" />
+    <Compile Include="Parameter\Request\CRM\UpdatePayWalletAmountRequest.cs" />
+    <Compile Include="Parameter\Request\CRM\UpgradeComputeRequest.cs" />
+    <Compile Include="Parameter\Request\CRM\UpgradeRequest.cs" />
+    <Compile Include="Parameter\Request\CRM\UserInfoRequest.cs" />
+    <Compile Include="Parameter\Request\CRM\UserInfoResponse.cs" />
+    <Compile Include="Parameter\Request\Finance\SaveRechargeRequest.cs" />
+    <Compile Include="Parameter\Request\Finance\UpdatePayStatusRequest.cs" />
+    <Compile Include="Parameter\Request\Fn\BonusLogAdminQueryRequest.cs" />
+    <Compile Include="Parameter\Request\Fn\CalculateRequest.cs" />
+    <Compile Include="Parameter\Request\Fn\CashoutRequest.cs" />
+    <Compile Include="Parameter\Request\Fn\FnBonusLogRequest.cs" />
+    <Compile Include="Parameter\Request\Fn\FnCashoutQueryRequest.cs" />
+    <Compile Include="Parameter\Request\Fn\StockAccountRequest.cs" />
+    <Compile Include="Parameter\Request\Fn\StockRecordRequest.cs" />
+    <Compile Include="Parameter\Request\Fn\TradeLogRequest.cs" />
+    <Compile Include="Parameter\Request\Fn\UpdateWalletAmountRequest.cs" />
+    <Compile Include="Parameter\Request\Member\NewUpgradeRequest.cs" />
+    <Compile Include="Parameter\Request\NewCRM\NewUpgradeRequest.cs" />
+    <Compile Include="Parameter\Request\SMS\RegisterReqeust.cs" />
+    <Compile Include="Parameter\Request\SMS\SendVerifyCodeRequest.cs" />
+    <Compile Include="Parameter\Request\SMS\SMSQueryRequeest.cs" />
+    <Compile Include="Parameter\Request\SMS\SmsRequest.cs" />
+    <Compile Include="Parameter\Request\Video\EditVideoRequest.cs" />
+    <Compile Include="Parameter\Request\Video\EditVideoResonse.cs" />
+    <Compile Include="Parameter\Request\Video\SaveVideoCategoryRequest.cs" />
+    <Compile Include="Parameter\Request\Video\VideoCategoryQueryRequeest.cs" />
+    <Compile Include="Parameter\Request\Video\VideoFavQueryRequest.cs" />
+    <Compile Include="Parameter\Request\Video\VideoItemQueryRequest.cs" />
+    <Compile Include="Parameter\Request\Video\VideoItemRequest.cs" />
+    <Compile Include="Parameter\Request\Video\VideoQueryRequeest.cs" />
+    <Compile Include="Parameter\Request\WeiXin\SendMessageRequest.cs" />
+    <Compile Include="Parameter\Request\WeiXin\WeixinRequest.cs" />
+    <Compile Include="Parameter\Response\CRM\LoginResponse.cs" />
+    <Compile Include="Parameter\Response\CRM\ProfileResponse.cs" />
+    <Compile Include="Parameter\Response\CRM\RegistrationRecommendResponse.cs" />
+    <Compile Include="Parameter\Response\CRM\UpgradeComputeResponse.cs" />
+    <Compile Include="Parameter\Response\SMS\SmsResponse.cs" />
+    <Compile Include="Parameter\Response\Auth\RoleResponse.cs" />
+    <Compile Include="Parameter\Response\Bs\PermissionResponse.cs" />
+    <Compile Include="Parameter\Response\Bs\MenuResponse.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Parameter\Request\CRM\LoginRequest.cs" />
+    <Compile Include="Parameter\Request\CRM\RegisterRequest.cs" />
+    <Compile Include="Tables\Bs\BsAuthorize.cs" />
+    <Compile Include="Tables\Bs\BsCode.cs" />
+    <Compile Include="Tables\Bs\BsLog.cs" />
+    <Compile Include="Tables\Bs\BsMenu.cs" />
+    <Compile Include="Tables\Bs\BsMenuPermission.cs" />
+    <Compile Include="Tables\Bs\BsNotice.cs" />
+    <Compile Include="Tables\Bs\BsPermission.cs" />
+    <Compile Include="Tables\Bs\BsRole.cs" />
+    <Compile Include="Tables\Bs\BsUser.cs" />
+    <Compile Include="Tables\Bs\BsUserRole.cs" />
+    <Compile Include="Tables\Bs\BsSMS.cs" />
+    <Compile Include="Tables\CRM\CrAgency.cs" />
+    <Compile Include="Tables\CRM\CrCustomer.cs" />
+    <Compile Include="Tables\CRM\CrRecommend.cs" />
+    <Compile Include="Tables\Finance\FnBonusLog.cs" />
+    <Compile Include="Tables\Finance\FnCashout.cs" />
+    <Compile Include="Tables\Finance\FnRecharge.cs" />
+    <Compile Include="Tables\Finance\FnStockAccount.cs" />
+    <Compile Include="Tables\Finance\FnStockRecord.cs" />
+    <Compile Include="Tables\Finance\FnTradeLog.cs" />
+    <Compile Include="Tables\Fore\FeCategory.cs" />
+    <Compile Include="Tables\Fore\FeVideoRecord.cs" />
+    <Compile Include="Tables\Fore\FeVideo.cs" />
+    <Compile Include="Tables\Fore\FeVideoItem.cs" />
+    <Compile Include="View\Bs\MenuPermissionView.cs" />
+    <Compile Include="View\Bs\RoleView.cs" />
+    <Compile Include="View\Bs\Ext\UserExt.cs" />
+    <Compile Include="View\CRM\CustomerView.cs" />
+    <Compile Include="View\CRM\Ext\CustomerExt.cs" />
+    <Compile Include="View\CRM\Ext\RecommendExt.cs" />
+    <Compile Include="View\CRM\PlatformView.cs" />
+    <Compile Include="View\CRM\RegisterView.cs" />
+    <Compile Include="View\Fn\BonusLogResponse.cs" />
+    <Compile Include="View\CRM\Ext\BanksConfig.cs" />
+    <Compile Include="View\CRM\CustomerLevelView.cs" />
+    <Compile Include="View\CRM\GradeView.cs" />
+    <Compile Include="View\CRM\LevelConfig.cs" />
+    <Compile Include="View\Fn\Ext\BonusLogExt.cs" />
+    <Compile Include="View\Fn\Ext\StockAccountExt.cs" />
+    <Compile Include="View\Fn\Ext\TradeLogExt.cs" />
+    <Compile Include="View\Fore\Ext\VideoExt.cs" />
+    <Compile Include="View\Fore\Ext\VideoItemExt.cs" />
+    <Compile Include="View\Fore\VideoItemView.cs" />
+    <Compile Include="View\Fore\VideoPlayView.cs" />
+    <Compile Include="View\LoginInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="View\Auth\" />
+    <Folder Include="View\Finance\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

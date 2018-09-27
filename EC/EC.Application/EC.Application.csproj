@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A3048687-1A6E-4CE3-8DC1-359D79ADA880}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EC.Application</RootNamespace>
+    <AssemblyName>EC.Application</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="aliyun-net-sdk-core">
+      <HintPath>..\..\lib\aliyun-net-sdk-core.dll</HintPath>
+    </Reference>
+    <Reference Include="aliyun-net-sdk-dysmsapi">
+      <HintPath>..\..\lib\aliyun-net-sdk-dysmsapi.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac">
+      <HintPath>..\..\lib\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper, Version=4.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AutoMapper.4.1.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="EC.Libraries.WeiXin">
+      <HintPath>..\..\lib\EC.Libraries.WeiXin.dll</HintPath>
+    </Reference>
+    <Reference Include="Ploeh.AutoFixture">
+      <HintPath>..\..\packages\AutoFixture.3.36.12\lib\net40\Ploeh.AutoFixture.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UnitTestGenerator">
+      <HintPath>..\..\packages\UnitTestGenerator.0.4.4.0\lib\net45\UnitTestGenerator.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ConfigApp.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tables\Bs\AuthorizeApp.cs" />
+    <Compile Include="Tables\Bs\CodeApp.cs" />
+    <Compile Include="Tables\Bs\LogApp.cs" />
+    <Compile Include="Tables\Bs\MenuApp.cs" />
+    <Compile Include="Tables\Bs\MenuPermissionApp.cs" />
+    <Compile Include="Tables\Bs\NoticeApp.cs" />
+    <Compile Include="Tables\Bs\PermissionApp.cs" />
+    <Compile Include="Tables\Bs\RoleApp.cs" />
+    <Compile Include="Tables\Bs\UserApp.cs" />
+    <Compile Include="Tables\CRM\AuthApp.cs" />
+    <Compile Include="Tables\CRM\AgencyApp.cs" />
+    <Compile Include="Tables\CRM\CustomerApp.cs" />
+    <Compile Include="Tables\CRM\CustomerExtApp.cs" />
+    <Compile Include="Tables\CRM\NewCustomerApp.cs" />
+    <Compile Include="Tables\CRM\RecommendApp.cs" />
+    <Compile Include="Tables\CRM\SmsApp.cs" />
+    <Compile Include="Tables\Fn\FnBonusLogApp.cs" />
+    <Compile Include="Tables\Fn\FnCashoutApp.cs" />
+    <Compile Include="Tables\Fn\RechargeApp.cs" />
+    <Compile Include="Tables\Fn\StockAccountApp.cs" />
+    <Compile Include="Tables\Fn\StockRecordApp.cs" />
+    <Compile Include="Tables\Fn\TradeLogApp.cs" />
+    <Compile Include="Tables\Fore\VideoApp.cs" />
+    <Compile Include="Tables\Fore\VideoCategoryApp.cs" />
+    <Compile Include="Tables\Fore\VideoRecordApp.cs" />
+    <Compile Include="Tables\Fore\VideoItemApp.cs" />
+    <Compile Include="Tables\SMS\MailApp.cs" />
+    <Compile Include="Tables\WeiXin\WeiXinApp.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DataAccess\EC.DataAccess\EC.DataAccess.csproj">
+      <Project>{b125f758-3145-4528-8629-44635a80468e}</Project>
+      <Name>EC.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\EC.Libraries.Core\EC.Libraries.Core.csproj">
+      <Project>{87c45a44-5be9-4f1f-8711-a649f981d4d3}</Project>
+      <Name>EC.Libraries.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\EC.Libraries.Email\EC.Libraries.Email.csproj">
+      <Project>{fec15073-f4f1-40e5-8f04-9ad4d14cca8c}</Project>
+      <Name>EC.Libraries.Email</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\EC.Libraries.Framework\EC.Libraries.Framework.csproj">
+      <Project>{8cfe1285-ac06-40de-a0a5-7d98a7fdd174}</Project>
+      <Name>EC.Libraries.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\EC.Libraries.Redis\EC.Libraries.Redis.csproj">
+      <Project>{dfcd7c94-cda3-4d26-8e7c-6dd4c3386a4a}</Project>
+      <Name>EC.Libraries.Redis</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\EC.Libraries.Util\EC.Libraries.Util.csproj">
+      <Project>{5eaa7ad8-edd2-4832-8462-9e105d191e2e}</Project>
+      <Name>EC.Libraries.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EC.Entity\EC.Entity.csproj">
+      <Project>{2d1497eb-ab53-480c-a37f-87f9941b3e0d}</Project>
+      <Name>EC.Entity</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
