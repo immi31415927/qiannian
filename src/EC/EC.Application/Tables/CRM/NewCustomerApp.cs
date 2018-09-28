@@ -8,6 +8,7 @@ namespace EC.Application.Tables.CRM
 {
     using EC.DataAccess.Bs;
     using EC.DataAccess.CRM;
+    using EC.DataAccess.Fn;
     using EC.Entity;
     using EC.Entity.Enum;
     using EC.Entity.Output.Fore;
@@ -30,7 +31,11 @@ namespace EC.Application.Tables.CRM
         /// </summary>
 		private int NextGrade(int grade)
 		{
-            return grade + interval;
+            var nextGrade = grade + interval;
+            if (nextGrade > EC.Entity.Enum.CustomerEnum.NewGrade.八星代理.GetHashCode()) {
+                throw new Exception("你已是最高级别了");
+            }
+            return nextGrade;
 		}
 		
         /// <summary>
@@ -97,8 +102,9 @@ namespace EC.Application.Tables.CRM
                 //微信提示
                 var weiXinTipList = new List<WeiXinTip>();
 
+                #region 
                 foreach (var item in referrerTop)
-                { 
+                {
                     var referrer = upgradeGrades.FirstOrDefault(p=>p.Sort == item.Sort);
 
                     //钱包
@@ -107,16 +113,33 @@ namespace EC.Application.Tables.CRM
 
                     if (item.Grade < grade.Type)
                     {
-                        var thatReferrerAll =GetReferrer(customers, new List<ParentIds>(), item.CustomerSysNo, 1);
+                        #region 不满足
+                        var thatReferrerAll = GetReferrer(customers, new List<ParentIds>(), item.CustomerSysNo, 1);
                         if (thatReferrerAll.Count > 0)
                         {
-                            this.Find(batchUpgradeParentList, batchInertBonusLogList,weiXinTipList, thatReferrerAll, grade, item.Sort);
+                            this.Find(batchUpgradeParentList, batchInertBonusLogList,weiXinTipList, thatReferrerAll, grade, item);
                         }
-                        //设置待结算
-                        //SettledBonus(batchUpgradeParent, grade.Type, walletAmount);
-                        //batchUpgradeParentList.Add(batchUpgradeParent);
+                        //50%待结算
+                        var batchUpgradeParent = new BatchUpgradeParent()
+                        {
+                            CustomerSysNo = item.CustomerSysNo,
+                            WalletAmount = walletAmount,
+                            SettledBonus20 = 0,
+                            SettledBonus30 = 0,
+                            SettledBonus40 = 0,
+                            SettledBonus50 = 0,
+                            SettledBonus60 = 0,
+                            SettledBonus70 = 0,
+                            SettledBonus80 = 0,
+                            SettledBonus90 = 0
+                        };
+                        SettledBonus(batchUpgradeParent, grade.Type, walletAmount);
+                        batchUpgradeParentList.Add(batchUpgradeParent);
+                        #endregion
                     }
-                    else {
+                    else
+                    {
+                        #region 满足
                         var batchUpgradeParent = new BatchUpgradeParent()
                         {
                             CustomerSysNo = item.CustomerSysNo,
@@ -132,8 +155,11 @@ namespace EC.Application.Tables.CRM
                         };
 
                         batchUpgradeParentList.Add(batchUpgradeParent);
+                        #endregion
                     }
                 }
+                #endregion
+                
             }
             catch (Exception ex) {
                 result.Message = ex.Message;
@@ -150,8 +176,41 @@ namespace EC.Application.Tables.CRM
         /// <param name="thatReferrerAll"></param>
         /// <param name="grade"></param>
         /// <param name="sort"></param>
-        private void Find(List<BatchUpgradeParent> batchUpgradeParent,List<FnBonusLog> bonusLog,List<WeiXinTip> weixinTip, List<ParentIds> thatReferrerAll,Grade grade, int sort)
+        private void Find(List<BatchUpgradeParent> batchUpgradeParent, List<FnBonusLog> bonusLog, List<WeiXinTip> weixinTip, List<ParentIds> thatReferrerAll, Grade grade, ParentIds item)
         {
+            this.RecursionFind(thatReferrerAll, grade, item, item.Sort, 1);
+        }
+
+        /// <summary>
+        /// 循环查找 cycleTotal
+        /// </summary>
+        /// <param name="thatReferrerAll"></param>
+        /// <param name="grade"></param>
+        /// <param name="item"></param>
+        /// <param name="cycleTotal">循环总数</param>
+        /// <param name="cycles">次数</param>
+        private ParentIds RecursionFind(List<ParentIds> thatReferrerAll, Grade grade, ParentIds item, int cycleTotal, int cycles = 1)
+        {
+            var referrer = thatReferrerAll.FirstOrDefault(p => p.CustomerSysNo == item.ReferrerSysNo);
+            if (referrer != null) {
+                if (cycleTotal == cycles)
+                {
+                    if (item.Grade >= referrer.Grade)
+                    {
+                        return referrer;
+                    }
+                    else {
+                        this.RecursionFind(thatReferrerAll, grade, referrer, cycleTotal, cycles);
+                    }
+                }
+                else { 
+                
+                }
+                cycles++;
+                
+            }
+
+            return null;
         }
 
         /// <summary>
