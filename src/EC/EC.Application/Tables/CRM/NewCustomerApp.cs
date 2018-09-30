@@ -118,7 +118,9 @@ namespace EC.Application.Tables.CRM
                         if (thatReferrerAll.Count > 0)
                         {
                             //batchUpgradeParentList, batchInertBonusLogList,weiXinTipList, 
-                            this.RecursionFind(thatReferrerAll, grade, item, item.Sort, item.Sort, 1);
+                            var findCustomer = this.Find(thatReferrerAll, grade, item, item.Sort, item.Sort, 1);
+                            if (findCustomer != null) { 
+                            }
                         }
                         //50%待结算
                         var batchUpgradeParent = new BatchUpgradeParent()
@@ -177,7 +179,7 @@ namespace EC.Application.Tables.CRM
         /// <param name="increment">增量</param>
         /// <param name="cycleTotal">循环总数</param>
         /// <param name="cycles">次数</param>
-        private ParentIds RecursionFind(List<ParentIds> referrerAll, Grade grade, ParentIds item, int increment, int cycleTotal, int cycles = 0)
+        private ParentIds Find(List<ParentIds> referrerAll, Grade grade, ParentIds item, int increment, int cycleTotal, int cycles = 0)
         {
             var referrer = referrerAll.FirstOrDefault(p => p.CustomerSysNo == item.ReferrerSysNo);
             if (referrer != null)
@@ -192,17 +194,18 @@ namespace EC.Application.Tables.CRM
                     {
                         cycles++;
                         cycleTotal = cycleTotal + increment;
-                        this.RecursionFind(referrerAll, grade, referrer, increment, cycleTotal, cycles);
+                        return this.Find(referrerAll, grade, referrer, increment, cycleTotal, cycles);
                     }
                 }
                 else
                 {
                     cycles++;
-                    cycleTotal++;
-                    this.RecursionFind(referrerAll, grade, referrer, increment, cycles, cycles);
+                    return this.Find(referrerAll, grade, referrer, increment, cycleTotal, cycles);
                 }
             }
-            return null;
+            else {
+                return null;
+            }
         }
 
         /// <summary>
@@ -214,11 +217,10 @@ namespace EC.Application.Tables.CRM
         /// <param name="thatReferrerAll"></param>
         /// <param name="grade"></param>
         /// <param name="sort"></param>
-        private void Find(List<BatchUpgradeParent> batchUpgradeParent, List<FnBonusLog> bonusLog, List<WeiXinTip> weixinTip, List<ParentIds> thatReferrerAll, Grade grade, ParentIds item)
-        {
-            this.RecursionFind(thatReferrerAll, grade, item, item.Sort, item.Sort, 1);
-        }
-
+        //private void Find(List<BatchUpgradeParent> batchUpgradeParent, List<FnBonusLog> bonusLog, List<WeiXinTip> weixinTip, List<ParentIds> thatReferrerAll, Grade grade, ParentIds item)
+        //{
+        //    this.RecursionFind(thatReferrerAll, grade, item, item.Sort, item.Sort, 1);
+        //}
         
 
         /// <summary>
