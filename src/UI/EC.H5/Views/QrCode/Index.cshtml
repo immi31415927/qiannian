@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "生成二维码";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .body {
+        /*background-image: url(/theme/images/QRCode.png);*/
+        background-position: 0px -70px;
+        background-repeat: no-repeat;
+        max-width: 640px;
+        height: 100%;
+        min-height: 1050px;
+        max-height: 1136px;
+    }
+    /*
+        .explain{
+        width: 80%;
+        margin: 0 auto;
+        text-align: center;
+    }
+    .personlogo {
+        position: relative;
+        width: 80%;
+        margin: 0 auto;
+        margin-top: 520px;
+        height: 150px;
+    }
+    .personlogo div {float:left; margin-left: 10px;}    
+    .personlogo div img{width:100px; height:100px;}
+    .personlogo .head{line-height: 48px; height: 100px;}
+    
+    .personlogo:after{content: '';clear:both;}
+    .qrcode {
+        position: relative;
+        margin-top: 120px;
+
+    }
+    .qrcode img {
+        width: 260px;
+        height: 240px;
+    }*/
+</style>
+<div class="topt mgz"></div>
+<div class="top mgz xi28 cen bai">
+    生成二维码
+    <div class="topl"><a href="javascript:void(0);" onclick="window.history.go(-1);"><img src="@Url.Content("~/Theme/images/left.png")" align='absmiddle' style="margin-top:-4px"></a></div>
+    <a href="javascript:void(0);" onclick="javascript: location.reload();"><div class="toper r xi22 cen bai">重新获取</div></a>
+</div>
+<div class="body mgz cen bai">
+    <img src="@(ViewBag.ImgUrl)" />
+</div>

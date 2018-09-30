@@ -1,0 +1,26 @@
+------ New session ------
+2018-01-16 12:45:55,368 [6] INFO  - ec64b133ef534f39b597420a4557f543
+2018-01-16 12:46:46,995 [6] INFO  - data:<xml><spbill_create_ip><![CDATA[::1]]></spbill_create_ip><notify_url><![CDATA[http://weixin.1000n.com/Pay/PayNotifyUrl]]></notify_url><out_trade_no><![CDATA[ec64b133ef534f39b597420a4557f543]]></out_trade_no><appid><![CDATA[]]></appid><total_fee>1</total_fee><nonce_str><![CDATA[B0C57520C059F64AF91A51B73F42F6A7]]></nonce_str><sign><![CDATA[5EBF09768D8BDACCED57E3BC2E824142]]></sign><openid><![CDATA[o121v0wIoFtd8yWZiaezCVTU_Pqg]]></openid><mch_id><![CDATA[1491518502]]></mch_id><trade_type><![CDATA[JSAPI]]></trade_type><body><![CDATA[千年教育充值订单]]></body></xml>
+2018-01-16 12:46:47,859 [6] INFO  - 统一支付接口:<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[appid参数长度有误]]></return_msg>
+</xml>
+2018-01-16 12:46:47,885 [6] INFO  - 未将对象引用设置到对象的实例。
+2018-01-16 12:47:03,308 [5] INFO  - ec64b133ef534f39b597420a4557f543
+------ New session ------
+2018-01-16 12:49:23,683 [8] INFO  - ec64b133ef534f39b597420a4557f543
+2018-01-16 12:49:38,218 [8] INFO  - data:<xml><spbill_create_ip><![CDATA[::1]]></spbill_create_ip><notify_url><![CDATA[http://weixin.1000n.com/Pay/PayNotifyUrl]]></notify_url><out_trade_no><![CDATA[ec64b133ef534f39b597420a4557f543]]></out_trade_no><appid><![CDATA[wx9e1b2a5db4a6b3a7]]></appid><total_fee>1</total_fee><nonce_str><![CDATA[100141A1BC87797699668EA42817BEE7]]></nonce_str><sign><![CDATA[BE7BCB60D0D13115DC48A388E88CAF87]]></sign><openid><![CDATA[o121v0wIoFtd8yWZiaezCVTU_Pqg]]></openid><mch_id><![CDATA[1491518502]]></mch_id><trade_type><![CDATA[JSAPI]]></trade_type><body><![CDATA[千年教育充值订单]]></body></xml>
+2018-01-16 12:49:38,877 [8] INFO  - 统一支付接口:<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[商户号mch_id与appid不匹配]]></return_msg>
+</xml>
+2018-01-16 12:49:38,903 [8] INFO  - 未将对象引用设置到对象的实例。
+2018-01-16 12:49:51,403 [7] INFO  - ec64b133ef534f39b597420a4557f543
+2018-01-16 12:50:00,455 [7] INFO  - data:<xml><spbill_create_ip><![CDATA[::1]]></spbill_create_ip><notify_url><![CDATA[http://weixin.1000n.com/Pay/PayNotifyUrl]]></notify_url><out_trade_no><![CDATA[ec64b133ef534f39b597420a4557f543]]></out_trade_no><appid><![CDATA[wx9e1b2a5db4a6b3a7]]></appid><total_fee>1</total_fee><nonce_str><![CDATA[BA977156AA7C0F296236B6AAB7095504]]></nonce_str><sign><![CDATA[5237C9C46E08270FB260D055422DD980]]></sign><openid><![CDATA[o121v0wIoFtd8yWZiaezCVTU_Pqg]]></openid><mch_id><![CDATA[1491518502]]></mch_id><trade_type><![CDATA[JSAPI]]></trade_type><body><![CDATA[千年教育充值订单]]></body></xml>
+2018-01-16 12:50:07,839 [7] INFO  - 统一支付接口:<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[商户号mch_id与appid不匹配]]></return_msg>
+</xml>
+2018-01-16 12:50:25,301 [7] INFO  - 未将对象引用设置到对象的实例。
+2018-01-16 12:50:26,686 [8] INFO  - ec64b133ef534f39b597420a4557f543
+2018-01-16 12:51:08,166 [8] INFO  - data:<xml><spbill_create_ip><![CDATA[::1]]></spbill_create_ip><notify_url><![CDATA[http://weixin.1000n.com/Pay/PayNotifyUrl]]></notify_url><out_trade_no><![CDATA[ec64b133ef534f39b597420a4557f543]]></out_trade_no><appid><![CDATA[wx9e1b2a5db4a6b3a7]]></appid><total_fee>1</total_fee><nonce_str><![CDATA[6B7005132885948DDD0ED379487A5EE0]]></nonce_str><sign><![CDATA[B5543B4557D5BAED79CC0112BD52DF0D]]></sign><openid><![CDATA[o121v0wIoFtd8yWZiaezCVTU_Pqg]]></openid><mch_id><![CDATA[1491518502]]></mch_id><trade_type><![CDATA[JSAPI]]></trade_type><body><![CDATA[千年教育充值订单]]></body></xml>
+------ New session ------
+2018-01-16 12:52:59,541 [7] INFO  - ec64b133ef534f39b597420a4557f543
+2018-01-16 12:53:15,381 [7] INFO  - data:<xml><spbill_create_ip><![CDATA[::1]]></spbill_create_ip><notify_url><![CDATA[http://weixin.1000n.com/Pay/PayNotifyUrl]]></notify_url><out_trade_no><![CDATA[ec64b133ef534f39b597420a4557f543]]></out_trade_no><appid><![CDATA[wx9535283296d186c3]]></appid><total_fee>1</total_fee><nonce_str><![CDATA[CC4A9B71504D005A38C77F96DB93663E]]></nonce_str><sign><![CDATA[A3E4C25728B86D22A9B8E9C2F793999E]]></sign><openid><![CDATA[o121v0wIoFtd8yWZiaezCVTU_Pqg]]></openid><mch_id><![CDATA[1491518502]]></mch_id><trade_type><![CDATA[JSAPI]]></trade_type><body><![CDATA[千年教育充值订单]]></body></xml>

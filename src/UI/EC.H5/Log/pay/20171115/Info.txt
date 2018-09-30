@@ -1,0 +1,20 @@
+------ New session ------
+2017-11-15 16:01:52,120 [5] INFO  - 84e0cfc13c8a4f13b26139e0689e1b95
+2017-11-15 16:01:55,138 [5] INFO  - <xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid total_fee]]></return_msg>
+</xml>
+2017-11-15 16:01:55,166 [5] INFO  - 未将对象引用设置到对象的实例。
+------ New session ------
+2017-11-15 16:04:04,580 [7] INFO  - 84e0cfc13c8a4f13b26139e0689e1b95
+2017-11-15 16:04:07,961 [7] INFO  - <xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid total_fee]]></return_msg>
+</xml>
+2017-11-15 16:04:07,961 [7] INFO  - 未将对象引用设置到对象的实例。
+------ End session ------
+------ New session ------
+2017-11-15 16:18:26,922 [11] INFO  - 6d76509ce2374021bc474ffbd8a2d5fa
+2017-11-15 16:18:28,719 [11] INFO  - <xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid total_fee]]></return_msg>
+</xml>
+2017-11-15 16:18:28,719 [11] INFO  - 未将对象引用设置到对象的实例。
+------ End session ------

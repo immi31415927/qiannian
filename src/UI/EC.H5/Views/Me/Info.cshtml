@@ -1,0 +1,115 @@
+﻿@using EC.Entity.Tables.CRM
+@model EC.Entity.Tables.CRM.CrCustomer
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+    var customer = ViewBag.customer as CrCustomer;
+}
+<div class="topt mgz"></div>
+<div class="top mgz xi28 cen bai">
+    个人资料
+    <div class="topl"><a href="@Url.Content("~/Me/Index")"><img src="/Theme/images/left.png" align='absmiddle' style="margin-top:-4px"></a></div>
+</div>
+@Html.Action("FundShow", "Me")
+<form id="form">
+    <div class="con4 mgz">
+        <ul>
+            <li>
+                <div class="con4l f xi24">姓名</div>
+                <div class="con4m f xi20">@(Model.RealName)</div>
+            </li>
+            <li>
+                <div class="con4l f xi24">有效期</div>
+                <div class="con4m f xi20"><input type="text" placeholder="@(string.IsNullOrWhiteSpace(Model.ExpiresTime) ? "请续费" : Model.ExpiresTime)" readonly="readonly"></div>
+                @*<a href="@Url.Action("Renew", "Me")"><div class="con4rs r xi22 cen">续费</div></a>*@
+            </li>
+            <li>
+                <div class="con4l f xi24">密码</div>
+                <div class="con4m f xi20"><input type="password" placeholder="******" readonly="readonly"></div>
+                <a href="@Url.Action("Password", "Me")"><div class="con4rs r xi22 cen">修改</div></a>
+            </li>
+            <li>
+                <div class="con4l f xi24">电话</div>
+                <div class="con4m f xi20"><input type="tel" name="phoneNumber" placeholder="@(Model.PhoneNumber)" readonly="readonly"></div>
+            </li>
+            <li>
+                <div class="con4l f xi24">开户行</div>
+                <div class="con4m f xi20">
+                    <select data-am-selected="{searchBox: 1}" name="bank">
+                        <option value="">请选择</option>
+                        @{
+                            string selc;
+                            foreach (var dict in (IDictionary<int, string>)ViewBag.bankTypeList)
+                            {
+                                selc = dict.Key == Model.Bank ? "selected='selected'" : string.Empty;
+                                <option value="@(dict.Key)" @Html.Raw(selc)>@(dict.Value)</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="con4r r"><img src="/Theme/images/xia.png" align='absmiddle' style="margin-top:-4px;"></div>
+            </li>
+            <li>
+                <div class="con4l f xi24">银行卡</div>
+                <div class="con4m f xi20"><input type="text" name="bankNumber" value="@(Model.BankNumber)" maxlength="20" placeholder="请输入开户银行卡号"></div>
+            </li>
+            @*<li>
+                    <div class="con4l f xi24">验证码</div>
+                    <div class="con4m f xi20"><input type="text" placeholder="请输入验证码"></div>
+                    <a href="#"><div class="con4rs r xi20 cen">发送验证码</div></a>
+                </li>*@
+        </ul>
+    </div>
+    <div class="con9 mgz xi18">提示：为了您的账户安全，请填写真实信息</div>
+    <a id="submit"><div class="con10 mgz xi30 cen bai mg2">确认</div></a>
+</form>
+
+<a href="@Url.Content("~/Me/Recharge")">test</a>
+
+@section script{
+    <script type="text/javascript">
+        $(function () {
+
+            var form = $("#form");
+
+            $("a#submit").click(function () {
+
+                
+                var bank = $("select[name='bank']").find("option:selected").val();
+                var bankNumber = $("input[name='bankNumber']").val();
+
+                if ($.vailCenter.isNullOrEmptySpance(bank)) {
+                    UI.Tips("请选择银行！");
+                    return false;
+                }
+
+                if (!$.vailCenter.isPositiveInt(bankNumber)) {
+                    UI.Tips("请输入银行卡！");
+                    return false;
+                }
+
+                UI.Loading();
+
+                var data = {
+                    bank: bank,
+                    bankNumber: bankNumber
+                };
+
+                $.post("@Url.Action("Profile", "Me")", data, function (res) {
+                    if (res.Status) {
+
+                        UI.Tips(res.Message);
+
+                        UI.Hide();
+
+                    } else {
+
+                    }
+                });
+            });
+        });
+
+    </script>
+}
+

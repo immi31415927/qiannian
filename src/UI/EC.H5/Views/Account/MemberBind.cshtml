@@ -1,0 +1,58 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="con2 mgz bai cen xi35" style="padding: 20px 0 20px 0;">
+    <p></p>
+    <img src="/theme/images/logo.png" width="150px">
+    <p></p>
+    会员绑定<br>
+    <span class="xi18">MEMBER BIND</span>
+</div>
+<form id="form">
+    <input type="hidden" name="openId" value="@(ViewBag.openId)">
+    <div class="con4 mgz">
+        <ul>
+            <li>
+                <div class="con4l f xi24">手机</div>
+                <div class="con4m f xi20"><input type="tel" placeholder="请输入手机号码" name="account"></div>
+            </li>
+            <li>
+                <div class="con4l f xi24">密码</div>
+                <div class="con4m f xi20"><input type="password" placeholder="请输入登录密码" name="password"></div>
+            </li>
+        </ul>
+    </div>
+    <div class="con9 mgz xi22">若尚未注册账户，请点此<a href="@Url.Action("Register", "Account")"><span class="hong">注册</span></a></div>
+    <a id="submit"><div class="con10 mgz xi30 cen bai mg2">确认绑定</div></a>
+</form>
+@section script{
+    <script type="text/javascript">
+            $(function () {
+                var form = $("#form");
+                $("a#submit").click(function () {
+                    var account = $("input[name='account']").val();
+                    var password = $("input[name='password']").val();
+                    //真实姓名
+                    if ($.vailCenter.isNullOrEmptySpance(account)) {
+                        UI.Tips("请输入手机号");
+                        return false;
+                    }
+                    //手机号
+                    if ($.vailCenter.isNullOrEmptySpance(password)) {
+                        UI.Tips("请输入密码");
+                        return false;
+                    }
+                    UI.Loading();
+                    $.post("@Url.Action("MemberBind", "Account")", form.serialize(), function (res) {
+                        if (res.Status) {
+                            UI.Tips("绑定成功,正在登录");
+                            window.location.href = "@Server.UrlDecode(ViewBag.returnUrl)";
+                        } else {
+                            UI.Tips(res.Message);
+                            UI.Hide();
+                        }
+                    });
+                });
+            });
+    </script>
+}

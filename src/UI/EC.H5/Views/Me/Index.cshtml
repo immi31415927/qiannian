@@ -1,0 +1,90 @@
+﻿@using EC.Entity.Enum
+@model EC.Entity.Tables.CRM.CrCustomer
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="topt mgz"></div>
+<div class="top mgz xi28 cen bai">
+    个人中心
+    <div class="topl"><a href="@Url.Content("~/Me/Index")"><img src="/theme/images/left.png" align='absmiddle' style="margin-top:-4px"></a></div>
+    @*<a href="@Url.Action("Logout", "Account")"><div class="topr xi22 cen bai">退出</div></a>*@
+</div>
+<div class="con1 mgz">
+    <div class="con1l f cen"><img src="@(Model.HeadImgUrl)" style="width:136px; height:136px;margin-top:-4px" align='absmiddle'></div>
+    <div class="con1r f bai">
+        <div class="con1rt ov">
+            <div class="con1rtl f xi24">@(Model.RealName)&nbsp;&nbsp;</div>
+            @if (!string.IsNullOrWhiteSpace(Model.ExpiresTime))
+            {
+                <div class="con1rf xi18">有效期 @(Model.ExpiresTime)</div>
+            }
+        </div>
+        <div class="con1rm ov">
+            <div class="con1rml f xi22">当前为&nbsp;@((CustomerEnum.Grade)Model.Grade)</div>
+            <div class="con1rmm f xi22"><a href="@(Url.Content("~/Me/Upgrade"))">代理升级</a></div>
+            <div class="con1rml  xi22" style="padding-top:20px;">总收益额&nbsp;@(ViewBag.bonusSum)</div>
+        </div>
+        @if (!string.IsNullOrWhiteSpace(Model.FollowDate))
+        {
+            <div class="con1rf xi18">关注时间 @(Model.FollowDate)</div>
+        }
+        
+    </div>
+</div>
+@Html.Action("FundShow", "Me")
+<div class="con3 mgz">
+    <ul>
+        <a href="@Url.Action("Index", "QrCode")">
+            <li>
+                <div class="con3l f"><img src="/theme/images/t1.png" style="width:67px"></div>
+                <div class="con3r f">
+                    <div class="con3rt xi24">推广二维码</div>
+                    <div class="con3rf xi22"><u>获取我的二维码</u></div>
+                </div>
+            </li>
+        </a>
+        <a href="@Url.Content("~/me/BonusLog")">
+            <li>
+                <div class="con3l f"><img src="/theme/images/t2.png" style="width:67px"></div>
+                <div class="con3r f">
+                    <div class="con3rt xi22">团队奖金</div>
+                    <div class="con3rf xi22">明细记录</div>
+                </div>
+            </li>
+        </a>
+    </ul>
+</div>
+<div class="con4 mgz">
+    <ul>
+        <a href="@Url.Action("MyFans", "Fans")">
+            <li>
+                <div class="con4l f xi24">我的粉丝</div>
+                <div class="con4r r"><img src="/theme/images/right.png" align='absmiddle' style="margin-top:-4px;"></div>
+            </li>
+        </a>
+        <a href="@Url.Action("MyTeam", "Team")">
+            <li>
+                <div class="con4l f xi24">我的团队</div>
+                <div class="con4r r"><img src="/theme/images/right.png" align='absmiddle' style="margin-top:-4px;"></div>
+            </li>
+        </a>
+        <a href="@Url.Content("~/me/Info")">
+            <li>
+                <div class="con4l f xi24">个人资料</div>
+                <div class="con4r r"><img src="/theme/images/right.png" align='absmiddle' style="margin-top:-4px;"></div>
+            </li>
+        </a>
+        <a href="@Url.Content("~/me/Cashout")">
+            <li>
+                <div class="con4l f xi24">申请提现</div>
+                <div class="con4r r"><img src="/theme/images/right.png" align='absmiddle' style="margin-top:-4px;"></div>
+            </li>
+        </a>
+        <a href="@Url.Content("~/me/CashoutLog")">
+            <li>
+                <div class="con4l f xi24">提现记录</div>
+                <div class="con4r r"><img src="/theme/images/right.png" align='absmiddle' style="margin-top:-4px;"></div>
+            </li>
+        </a>
+    </ul>
+</div>

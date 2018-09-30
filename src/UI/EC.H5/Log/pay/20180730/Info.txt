@@ -1,0 +1,13 @@
+------ New session ------
+2018-07-30 20:15:07,264 [20] INFO  - c7cb95dbc95d4911955a984062641f72
+2018-07-30 20:15:07,375 [20] INFO  - data:<xml><spbill_create_ip><![CDATA[::1]]></spbill_create_ip><notify_url><![CDATA[http://weixin.1000n.com/Pay/PayNotifyUrl]]></notify_url><out_trade_no><![CDATA[c7cb95dbc95d4911955a984062641f72]]></out_trade_no><appid><![CDATA[wx9535283296d186c3]]></appid><total_fee><![CDATA[4000]]></total_fee><nonce_str><![CDATA[F8DA06A03E1AF6EF445FC5B374BED692]]></nonce_str><sign><![CDATA[1551A4F5CAF648D16852CF6FB4D069E5]]></sign><openid><![CDATA[30]]></openid><mch_id><![CDATA[1491518502]]></mch_id><trade_type><![CDATA[JSAPI]]></trade_type><body><![CDATA[千年教育充值订单]]></body></xml>
+2018-07-30 20:15:09,877 [20] INFO  - 统一支付接口:<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid spbill_create_ip]]></return_msg>
+</xml>
+2018-07-30 20:15:09,950 [20] INFO  - 未将对象引用设置到对象的实例。
+2018-07-30 20:16:01,415 [24] INFO  - 3553a2894df048638b78b325fa1016e5
+2018-07-30 20:16:01,449 [24] INFO  - data:<xml><spbill_create_ip><![CDATA[::1]]></spbill_create_ip><notify_url><![CDATA[http://weixin.1000n.com/Pay/PayNotifyUrl]]></notify_url><out_trade_no><![CDATA[3553a2894df048638b78b325fa1016e5]]></out_trade_no><appid><![CDATA[wx9535283296d186c3]]></appid><total_fee><![CDATA[4000]]></total_fee><nonce_str><![CDATA[3214546468EFA4AC2B547C3899F43C57]]></nonce_str><sign><![CDATA[93AD665EF400328BB426596A03CEB1A5]]></sign><openid><![CDATA[30]]></openid><mch_id><![CDATA[1491518502]]></mch_id><trade_type><![CDATA[JSAPI]]></trade_type><body><![CDATA[千年教育充值订单]]></body></xml>
+2018-07-30 20:16:07,107 [24] INFO  - 统一支付接口:<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid spbill_create_ip]]></return_msg>
+</xml>
+2018-07-30 20:16:07,159 [24] INFO  - 未将对象引用设置到对象的实例。

@@ -1,0 +1,47 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model EC.Entity.Tables.CRM.CrCustomer
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section HeadJs{
+    <script src="@Url.Content("~/Theme/js/lazyloadv3.js")"></script>
+}
+<div class="topt mgz"></div>
+
+<div class="top mgz xi28 cen bai">
+    支付
+    <div class="topl"><a href="@Url.Content("~/Me/Index")"><img src="/theme/images/left.png" align='absmiddle' style="margin-top:-4px"></a></div>
+</div>
+@Html.Action("FundShow", "Me")
+<div id="loadding" style="border: 1px solid #ccc; border-radius: 5px; background-color: #eee; height: 100px; line-height: 100px; width: 50%; margin: 0 auto; text-align: center; ">正在打开微信支付……</div>
+<script type="text/javascript">
+            $(function() {
+                var loadding = $("#loadding");
+                loadding.css({ marginTop: ($(window).height() - 200) / 2 });
+                var handler = setInterval(function () {
+                    try {
+                        WeixinJSBridge.invoke('getBrandWCPayRequest', {
+                            "appId": "@ViewData["appId"]", //公众号名称，由商户传入
+                            "timeStamp": "@ViewData["timeStamp"]", //时间戳
+                            "nonceStr": "@ViewData["nonceStr"]", //随机串
+                            "package": "@Html.Raw(ViewData["package"])", //扩展包
+                            "signType": "MD5", //微信签名方式:MD5
+                            "paySign": "@ViewData["paySign"]" //微信签名
+                        }, function(res) {
+                            if (res.err_msg == "get_brand_wcpay_request:ok") {
+                                window.location.href = "@Url.Action("Index", "Me", new { id = ViewBag.Id })";
+                            } else {
+                                window.location.href = "@(ViewBag.SourceUrl)";
+                            }
+                        });
+                        loadding.text("正在完成微信支付……");
+                        clearInterval(handler);
+                    } catch (e) {
+                        loadding.text("启动微信支付……");
+                    }
+                }, 200);
+            });
+</script>
+

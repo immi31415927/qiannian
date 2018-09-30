@@ -1,0 +1,122 @@
+﻿@model EC.Entity.Tables.CRM.CrCustomer
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="topt mgz"></div>
+<div class="top mgz xi28 cen bai">
+    申请提现
+    <div class="topl"><a href="@Url.Content("~/Me/Index")"><img src="/Theme/images/left.png" align='absmiddle' style="margin-top:-4px"></a></div>
+</div>
+@Html.Action("FundShow", "Me")
+<form id="form">
+    <div class="con4 mgz">
+        <ul>
+            <li>
+                <div class="con4l f xi24">提现方式</div>
+                <div class="con4m f xi20">
+                    <select data-am-selected="{searchBox: 0}" name="cashoutType">
+                        <option value="">请选择</option>
+                        @{
+                            foreach (var dict in (IDictionary<int, string>)ViewBag.CashoutType)
+                            {
+                                if (dict.Key.Equals(EC.Entity.Enum.FnEnum.CashoutType.微信.GetHashCode()))
+                                {
+                                    <option value="@dict.Key">@dict.Value</option>
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="con4r r"><img src="/Theme/images/xia.png" align='absmiddle' style="margin-top:-4px;"></div>
+            </li>
+            <li>
+                <div class="con4l f xi24">提现金额</div>
+                <div class="con4m f xi20"><input type="text" name="amount" placeholder="请输入大于10金额"></div>
+            </li>
+
+            <li>
+                <div class="con4l f xi24">到账金额</div>
+                <div class="con4m f xi20"><input type="text" name="arrivalAmount" placeholder="0.00"></div>
+            </li>
+        </ul>
+    </div>
+    <div class="con11 mgz xi18">
+        提现时会预留50%到升级基金<br>
+        提现将扣除手续费0%
+    </div>
+    <a id="submit"><div class="con10 mgz xi30 cen bai mg2">确认</div></a>
+</form>
+@section script{
+    <script type="text/javascript">
+        $(function () {
+
+            var form = $("#form");
+
+            $("input[name='amount']").keyup(function () {
+
+                UI.Loading();
+
+                var cashoutType = $("select[name='cashoutType']").find("option:selected").val();
+
+                if ($.vailCenter.isNullOrEmptySpance(cashoutType)) {
+                    UI.Hide();
+                    $("input[name='amount']").val('');
+                    UI.Tips("请选择提现方式");
+                    return false;
+                }
+
+                $.post("@Url.Action("CashoutCalculate", "Me")", { amount: $(this).val() }, function(res) {
+                    if (res.Status) {
+                        $("input[name='arrivalAmount']").val(res.StatusCode);
+                        UI.Hide();
+                    } else {
+                        //$("input[name='amount']").val('');
+                        $("input[name='arrivalAmount']").val('');
+                        UI.Tips(res.Message);
+                        UI.Hide();
+                    }
+                });
+            });
+
+            $("a#submit").click(function () {
+
+                var amount = $("input[name='amount']").val();
+                var cashoutType = $("select[name='cashoutType']").find("option:selected").val();
+
+                if ($.vailCenter.isNullOrEmptySpance(amount)) {
+                    UI.Tips("请输入提现金额");
+                    return false;
+                }
+
+                if (!$.vailCenter.isPositiveInt(cashoutType)) {
+                    UI.Tips("请选择提现方式");
+                    return false;
+                }
+
+                UI.Loading();
+
+                var data = {
+                    amount: amount,
+                    cashoutType: cashoutType
+                };
+
+                $.post("@Url.Action("Cashout", "Me")", data, function (res) {
+                    if (res.Status) {
+                        $("input[name='amount']").val("");
+                        $("input[name='arrivalAmount']").val("");
+
+                        UI.Tips(res.Message);
+
+                        window.location.href = "/me/CashoutLog";
+
+                    } else {
+                        UI.Tips(res.Message);
+                        UI.Hide();
+                    }
+                });
+            });
+        });
+
+    </script>
+}
+

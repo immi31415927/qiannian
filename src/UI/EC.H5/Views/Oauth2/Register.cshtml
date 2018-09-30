@@ -1,0 +1,132 @@
+﻿@model EC.Entity.Parameter.Response.CRM.RegistrationRecommendResponse
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="con2 mgz bai cen xi35" style="padding: 20px 0 20px 0;">
+    会员注册<br>
+    <span class="xi18">NEW REGISTRATION</span>
+</div>
+<form id="form" class="am-form tpl-form-line-form">
+    <div class="con4 mgz">
+        <ul>
+            <li>
+                <div class="con4l f xi24">推荐人</div>
+                <div class="con4m f xi24">
+                                         @{
+                        if (Model != null && Model.CustomerSysNo > 0)
+                        {
+                            <input type="text" name="referrer" value="@(Model.PhoneNumber)" placeholder="@(Model.PhoneNumber) @(Model.RealName)" readonly="readonly" /><a href="tel:@(Model.PhoneNumber)"><div class="con4rs r xi20 cen">打电话</div></a>
+                        }
+                        else 
+                        {
+                            <input type="text" name="referrer" placeholder="输入推荐人" />
+                        }
+                    }
+                </div>
+            </li>
+            <li>
+                <div class="con4l f xi24">姓名</div>
+                <div class="con4m f xi20"><input type="text" name="realname" placeholder="请输入真实姓名" maxlength="15"></div>
+            </li>
+            <li>
+                <div class="con4l f xi24">手机</div>
+                <div class="con4m f xi20"><input type="tel" name="phonenumber" placeholder="手机" maxlength="11"></div>
+                <a href="#"><div class="con4rs r xi20 cen">发送验证码</div></a>
+            </li>
+            <li>
+                <div class="con4l f xi24">验证码</div>
+                <div class="con4m f xi20"><input type="tel" name="mobileverifycode" placeholder="请输入手机验证码" maxlength="6"></div>
+            </li>
+            <li>
+                <div class="con4l f xi24">密码</div>
+                <div class="con4m f xi20"><input type="password" name="password" placeholder="请输入登录密码" maxlength="15"></div>
+            </li>
+            <li>
+                <div class="con4l f xi24">确认密码</div>
+                <div class="con4m f xi20"><input type="password" name="confirmpassword" placeholder="请再次输入密码" maxlength="15"></div>
+            </li>
+            <li>
+                <div class="con4l f xi24">会员级别</div>
+                <div class="con4m f xi20">
+                    <select data-am-selected="{searchBox: 1}" name="registerPayType">
+                        @{
+                            foreach (var dict in (IDictionary<int, string>)ViewBag.RegisterPayType)
+                            {
+                                <option value="@dict.Key">@dict.Value @dict.Key</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="con4r r"><img src="/theme/images/xia.png" align='absmiddle' style="margin-top:-4px;"></div>
+            </li>
+        </ul>
+    </div>
+    <input type="hidden" name="openId" value="@(Model.OpenId)" />
+    <div class="con9 mgz xi22">若已有会员帐号，请点此<a href="@Url.Content("~/Oauth2/MemberBind")"><span class="hong">会员绑定</span></a></div>
+    <a href="#" class="submit"><div class="con10 mgz xi30 cen bai mg2">注册</div></a>
+</form>
+    @section script{
+        <script type="text/javascript">
+    $(function () {
+        var form = $("#form");
+
+        $("a.submit").click(function () {
+
+            var realname = $("input[name='realname']").val();
+            var phonenumber = $("input[name='phonenumber']").val();
+            var password = $("input[name='password']").val();
+            var confirmpassword = $("input[name='confirmpassword']").val();
+            var mobileverifycode = $("input[name='mobileverifycode']").val();
+            var grade = $("select[name='grade']").find("option:selected").val();
+            //真实姓名
+            if ($.vailCenter.isNullOrEmptySpance(realname)) {
+                UI.Tips("请输入真实姓名");
+                return false;
+            }
+            //手机号
+            if ($.vailCenter.isNullOrEmptySpance(phonenumber)) {
+                UI.Tips("请输入手机号");
+                return false;
+            }
+            //手机验证码
+            if ($.vailCenter.isNullOrEmptySpance(mobileverifycode)) {
+                UI.Tips("请输入手机验证码");
+                return false;
+            }
+            //密码
+            if ($.vailCenter.isNullOrEmptySpance(password)) {
+                UI.Tips("请输入密码");
+                return false;
+            }
+            //确认密码
+            if ($.vailCenter.isNullOrEmptySpance(confirmpassword)) {
+                UI.Tips("请输入确认密码");
+                return false;
+            }
+            UI.Loading();
+
+            $.post("@Url.Action("Register", "Oauth2")", form.serialize(), function (res) {
+                if (res.Status) {
+                    UI.Tips("注册成功、请支付");
+
+                    if (!$.vailCenter.isNullOrEmptySpance(res.Data)) {
+                        //注册成功支付
+                        window.location.href = "/pay/GoPayWeiXin/" + res.Data;
+                    } else {
+                        UI.Tips("注册成功");
+                        window.location.href = "/Me/Index/";
+                    }
+                } else {
+                    UI.Tips(res.Message);
+
+                    UI.Hide();
+                }
+            });
+            //UI.Tips("资料修改成功");
+            UI.Loading();
+        });
+    });
+
+
+        </script>
+    }

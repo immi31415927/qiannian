@@ -1,0 +1,92 @@
+﻿@model EC.Entity.Tables.CRM.CrCustomer
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="topt mgz"></div>
+<div class="top mgz xi28 cen bai">
+    帐户续费
+    <div class="topl"><a href="@Url.Content("~/Me/Index")"><img src="/Theme/images/left.png" align='absmiddle' style="margin-top:-4px"></a></div>
+</div>
+@Html.Action("FundShow", "Me")
+<div class="con4 mgz">
+    <ul>
+        <li>
+            <div class="con4l f xi24">续费金额</div>
+            <div class="con4m f xi20">200.00</div>
+        </li>
+        <li>
+            <div class="con4l f xi24">续费方式</div>
+            <div class="con4m f xi20">
+                <select data-am-selected="{searchBox: 1}" name="payWay">
+                    <option value="10">在线支付</option>
+                    <option value="20">奖金余额</option>
+                </select>
+            </div>
+            <div class="con4r r"><img src="/Theme/images/xia.png" align='absmiddle' style="margin-top:-4px;"></div>
+        </li>
+        <li>
+            <div class="con4l f xi24">新有效期</div>
+            @if (string.IsNullOrWhiteSpace(Model.ExpiresTime))
+            {
+                <div class="con4m f xi20">@(DateTime.Now.AddYears(1).ToString("yyyy-MM-dd"))</div>
+            }
+            else
+            {
+                <div class="con4m f xi20">@(Convert.ToDateTime(Model.ExpiresTime).AddYears(1).ToString("yyyy-MM-dd"))</div>
+            }
+            
+        </li>
+    </ul>
+</div>
+<a id="submit"><div class=" con10 mgz xi30 cen bai mg2" style="margin-top:52px;">确认</div></a>
+@section script{
+    <script type="text/javascript">
+        $(function () {
+
+            var form = $("#form");
+
+            $("a#submit").click(function () {
+
+                var payWay = $("select[name='payWay']").find("option:selected").val();
+
+                if ($.vailCenter.isNullOrEmptySpance(payWay)) {
+                    UI.Tips("请选择续费方式！");
+                    return false;
+                }
+
+                UI.Loading();
+
+                var data = {
+                    payWay: payWay,
+                };
+
+                UI.Confirm({
+                    content: "您确认要升级吗！",
+                    okBtnValue: payWay == 10 ? "去充值" : "确认续费",
+                    okCallBack: function() {
+
+                        $.post("@Url.Action("RenewSaveRecharge", "Me")", data, function (response) {
+                            if (response.Status) {
+                                if ($.vailCenter.isNullOrEmptySpance(response.Data)) {
+                                    UI.Tips(response.Message);
+                                    window.location.reload();
+                                    UI.Hide();
+                                } else {
+                                    window.location.href = "/Pay/GoPayWeiXin/" + response.Data;
+                                }
+                            } else {
+                                UI.Tips(response.Message);
+                                UI.Hide();
+                            }
+                        });
+                    },
+                    cancelCallBack: function() {
+                        UI.Hide();
+                    }
+                });
+
+            });
+        });
+
+    </script>
+}

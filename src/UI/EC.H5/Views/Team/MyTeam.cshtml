@@ -1,0 +1,105 @@
+﻿@using EC.Entity.Enum
+@using EC.Entity.Tables.CRM
+@using EC.Entity.View.CRM
+@using EC.Entity.View.CRM.Ext
+@using EC.Libraries.Util
+@{
+    ViewBag.Title = "我的团队";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var teamLevelList = ViewBag.TeamLevel != null && ViewBag.TeamLevel.Count > 0 ? ViewBag.TeamLevel as List<CustomerLevelView> : null;
+    var teamAllCount = teamLevelList != null ? teamLevelList.Sum(p => p.LevelTeamCount) : 0;
+    var teamCount = teamLevelList != null ? teamLevelList.Count() + 1 : 1;
+    var gradeEnum = EnumUtil.GetJsonEnum(typeof(CustomerEnum.Grade));
+    var count = Convert.ToInt32(teamCount / 4) + (teamCount % 4 > 0 ? 1 : 0);
+}
+
+@section HeadCss{
+    <link rel="stylesheet" href="@Url.Content("~/Theme/plugins/Pager/css/pager.css")" />
+}
+@section HeadJs{
+    <script src="@Url.Content("~/Theme/plugins/Pager/pager.js")"></script>
+    <script src="@Url.Content("~/Theme/plugins/Pager/customPager.js")"></script>
+    <script src="@Url.Content("~/Theme/js/UI/MyTeamPager.js")"></script>
+    <script type="text/javascript">
+        $(function () {
+            myTeamPager.control.url = '@Url.Action("MyTeamQuery", "Team")';
+            myTeamPager.control.GradeEnum = eval(@gradeEnum);
+            myTeamPager.control.topHeight = (parseInt('@(count)') * 84) + 248;
+            myTeamPager.control.imageDomain = '@(ViewBag.ImageDomain)';
+            myTeamPager.handler.init();
+        });
+
+        function setTab(name, cursel, n, level) {
+            for (var i = 1; i <= n; i++) {
+                var menu = document.getElementById(name + i);
+                menu.className = i == cursel ? "hover" : "";
+            }
+
+            $("#levelHide").val(level);
+            myTeamPager.handler.init();
+        }
+    </script>
+}
+
+<div class="topt mgz"></div>
+<div class="top mgz xi28 cen bai">
+    我的团队
+    <div class="topl"><a href="@Url.Action("Index", "Me")"><img src="@Url.Content("~/Theme/images/left.png")" align='absmiddle' style="margin-top:-4px"></a></div>
+</div>
+@Html.Action("FundShow", "Me")
+<div class="con7 mgz">
+    <ul>
+        <li id="one1" onclick="setTab('one', 1, @(teamCount),-1)" class="hover">
+            <a href="#">
+                团队总数<br>
+                <span class="xi18 hui">（@(ViewBag.teamCount)）</span>
+            </a>
+        </li>
+        @if (teamLevelList != null)
+        {
+            for (var i = 0; i < teamCount - 1; i++)
+            {
+                var item = teamLevelList[i];
+
+                <li id="one@(i+2)" onclick="setTab('one',@(i+2),@(teamCount),@(item.Level))">
+                    <a href="#">
+                        @(item.LevelLetter)组<br>
+                        <span class="xi18 hui">（@(item.LevelTeamCount)）</span>
+                    </a>
+                </li>
+            }
+        }
+    </ul>
+</div>
+
+<div class="con4 mgz" id="divTeam">
+    <ul>
+        @if (ViewBag.ReferrerEntity != null)
+        {
+            var customerExt = ViewBag.ReferrerEntity as CrCustomer;
+            <li>
+                <div class="con4l f xi24">我的导师 </div><a href="tel:@(customerExt.Account)"><span class="hui">@customerExt.RealName（@(customerExt.Account)）</span></a>
+            </li>
+        }
+        @if (teamLevelList != null)
+        {
+            for (var i = 0; i < teamLevelList.Count; i++)
+            {
+                var item = teamLevelList[i];
+
+                <li onclick="setTab('one',@(i+2),@(teamCount),@(item.Level))">
+                    <a href="javascript:void(0);">
+                        <div class="con4l f xi24">@(item.LevelLetter)组会员 </div><span class="lan">@(item.LevelTeamCount)</span>人
+                        <div class="con4r r"><img src="@Url.Content("~/Theme/images/right.png")" align='absmiddle' style="margin-top:-4px;"></div>
+                    </a>
+                </li>
+            }
+        }
+    </ul>
+</div>
+
+<div class="con5 mgz" style="display: none;" id="divPager">
+    <ul id="divContent"></ul>
+</div>
+<input type="hidden" id="levelHide" value="-1" />

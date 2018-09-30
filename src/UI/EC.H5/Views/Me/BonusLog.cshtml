@@ -1,0 +1,40 @@
+﻿@using EC.Entity.Enum
+@using EC.Libraries.Util
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var typeEnum = EnumUtil.GetJsonEnum(typeof(FnEnum.BonusLogType));
+}
+@section HeadCss{
+    <link rel="stylesheet" href="@Url.Content("~/Theme/plugins/Pager/css/pager.css")" />
+}
+@section HeadJs{
+    <script src="@Url.Content("~/Theme/plugins/Pager/pager.js")"></script>
+    <script src="@Url.Content("~/Theme/plugins/Pager/customPager.js")"></script>
+    <script src="@Url.Content("~/Theme/js/UI/BonusLogPager.js")"></script>
+    <script type="text/javascript">
+        $(function() {
+            bonusLogPager.control.url = '@Url.Action("BonusLogQuery", "Me")';
+            bonusLogPager.control.sendInfoUrl = '@Url.Action("SendInfo", "Fans")';
+            bonusLogPager.control.typeEnum = eval(@typeEnum);
+            bonusLogPager.handler.init();
+        });
+    </script>
+}
+<div class="topt mgz"></div>
+<div class="top mgz xi28 cen bai">
+    奖金记录
+    <div class="topl"><a href="@Url.Content("~/Me/Index")"><img src="/Theme/images/left.png" align='absmiddle' style="margin-top:-4px"></a></div>
+</div>
+@Html.Action("FundShow", "Me")
+<div class="con5 mgz" id="divPager">
+    <ul id="divContent"></ul>
+</div>
+@section script{
+    <script type="text/javascript">
+        $(function () {
+            //Search();
+        });
+    </script>
+}
+
+

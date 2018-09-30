@@ -1,0 +1,8 @@
+------ New session ------
+2018-01-12 09:29:40,087 [15] INFO  - 196108850ddf469894238abb8af7d92d
+2018-01-12 09:29:41,103 [15] INFO  - data:<xml><spbill_create_ip><![CDATA[::1]]></spbill_create_ip><notify_url><![CDATA[http://weixin.1000n.com/Pay/PayNotifyUrl]]></notify_url><out_trade_no><![CDATA[196108850ddf469894238abb8af7d92d]]></out_trade_no><appid><![CDATA[]]></appid><total_fee><![CDATA[20000]]></total_fee><nonce_str><![CDATA[3D0AEE99774419DA6FD235B1F24A0ECD]]></nonce_str><sign><![CDATA[662545E294D1B23DBA5C6619E789F53C]]></sign><openid><![CDATA[o121v0wIoFtd8yWZiaezCVTU_Pqg]]></openid><mch_id><![CDATA[1491518502]]></mch_id><trade_type><![CDATA[JSAPI]]></trade_type><body><![CDATA[千年教育充值订单]]></body></xml>
+2018-01-12 09:29:41,503 [15] INFO  - 统一支付接口:<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[appid参数长度有误]]></return_msg>
+</xml>
+2018-01-12 09:29:41,503 [15] INFO  - 未将对象引用设置到对象的实例。
+------ End session ------

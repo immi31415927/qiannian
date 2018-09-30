@@ -1,0 +1,85 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="topt mgz"></div>
+<div class="top mgz xi28 cen bai">
+    基金充值
+    <div class="topl"><a href="@Url.Content("~/Me/Upgrade")"><img src="/theme/images/left.png" align='absmiddle' style="margin-top:-4px"></a></div>
+</div>
+@Html.Action("FundShow", "Me")
+<form id="form">
+    <div class="con4 mgz">
+        <ul>
+            <li>
+                <div class="con4l f xi24">充值金额</div>
+                <div class="con4m f xi20"><input type="text" name="amount" placeholder="请输入充值金额"></div>
+            </li>
+            <li>
+                <div class="con4l f xi24">充值方式</div>
+                <div class="con4m f xi20">
+                    <select data-am-selected="{searchBox: 1}" name="payWay">
+                        <option value="10">在线支付</option>
+                        <option value="20">奖金余额</option>
+                    </select>
+                </div>
+                <div class="con4r r"><img src="/theme/images/xia.png" align='absmiddle' style="margin-top:-4px;"></div>
+            </li>
+        </ul>
+    </div>
+    <a id="submit"><div class="con10 mgz xi30 cen bai mg2" style="margin-top:52px;">确认</div></a>
+</form>
+@section script{
+    <script type="text/javascript">
+        $(function() {
+            var form = $("#form");
+
+            $("a#submit").click(function() {
+
+                var payWay = $("select[name='payWay']").find("option:selected").val();
+                var amount = $("input[name='amount']").val();
+
+
+                if ($.vailCenter.isNullOrEmptySpance(payWay)) {
+                    UI.Tips("请选择充值方式");
+                    return false;
+                }
+
+                UI.Loading();
+
+                var data = {
+                    payWay: payWay,
+                    amount: amount
+                };
+
+                var content = payWay == 10 ? "您确认要充值吗！" : "您确认要奖金充值吗";
+
+                UI.Confirm({
+                    content: content,
+                    okBtnValue: payWay == 10 ? "去充值" : "确认",
+                    okCallBack: function() {
+                        $.post("@Url.Action("SaveRecharge", "Me")", data, function(res) {
+                            if (res.Status) {
+                                if ($.vailCenter.isNullOrEmptySpance(res.Data)) {
+                                    UI.Tips("支付成功");
+                                    UI.Hide();
+                                } else {
+                                    window.location.href = "/Pay/GoPayWeiXin/" + res.Data;
+                                }
+                            } else {
+                                UI.Tips(res.Message);
+
+                                UI.Hide();
+                            }
+                        });
+                    },
+                    cancelCallBack: function() {
+                        UI.Hide();
+                    }
+                });
+                UI.Loading();
+            });
+        });
+
+    </script>
+}
+

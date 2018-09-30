@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "发送消息";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section HeadJs{
+    <script type="text/javascript">
+        $(function() {
+            $("#sendBtn").click(function() {
+                var message = $("#message").val();
+                var openId = $("#openId").val();
+
+                if ($.vailCenter.isNullOrEmptySpance(openId)) {
+                    UI.Alert({ content: "系统错误" });
+                    return;
+                }
+                if ($.vailCenter.isNullOrEmptySpance(message)) {
+                    UI.Alert({ content: "消息内容不能为空" });
+                    return;
+                }
+
+                $.ajax({
+                    type: "post",
+                    url: "@Url.Action("SendInfoResult", "Fans")",
+                    dataType: "json",
+                    data: { openId: openId, message: message },
+                    success: function (result) {
+                        if (!result.Status) {
+                            UI.Alert({ content: result.Message });
+                            return;
+                        }
+
+                        UI.Alert({ content: "信息发送成功" });
+                    },
+                    error: function (json) {
+                        UI.Alert({ content: "网络故障,请查看网络" });
+                    }
+                });
+            });
+        });
+    </script>
+}
+
+<div class="topt mgz"></div>
+<div class="top mgz xi28 cen bai">
+    消息发送
+    <div class="topl"><a href="javascript:void(0);" onclick="window.history.go(-1);"><img src="@Url.Content("~/Theme/images/left.png")" align='absmiddle' style="margin-top:-4px"></a></div>
+</div>
+<div class="con4 mgz">
+    <ul>
+        <li>
+            <div class="con4l f xi24">接收粉丝</div>
+            <div class="con4m f xi20">
+                @ViewBag.NickName
+                <input type="hidden" id="openId" value="@ViewBag.OpenId" />
+            </div>
+        </li>
+        <li>
+            <div class="con4l f xi24">消息内容</div>
+            <div class="con4m f xi20">
+                <input type="text" id="message" maxlength="300" placeholder="输入消息内容">
+            </div>
+        </li>
+    </ul>
+</div>
+<a href="javascript:void(0);" id="sendBtn"><div class="con10 mgz xi30 cen bai mg2" style="margin-top:26px">发送</div></a>

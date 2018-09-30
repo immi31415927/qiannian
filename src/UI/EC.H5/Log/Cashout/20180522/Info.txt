@@ -1,0 +1,2 @@
+------ New session ------
+2018-05-22 23:59:55,086 [11] INFO  - EC.H5 Ã·œ÷{"mch_appid":null,"mchid":null,"nonce_str":null,"partner_trade_no":null,"payment_no":null,"payment_time":null,"return_code":"SUCCESS","return_msg":null,"result_code":"SUCCESS","err_code":null,"err_code_des":null}

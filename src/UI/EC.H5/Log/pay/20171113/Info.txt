@@ -1,0 +1,174 @@
+------ New session ------
+2017-11-13 20:00:20,114 [11] INFO  - e0e4c63f09534f01b14f577b4b398fe6
+2017-11-13 20:00:23,140 [11] INFO  - <xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid total_fee]]></return_msg>
+</xml>
+2017-11-13 20:00:23,140 [11] INFO  - 未将对象引用设置到对象的实例。
+------ End session ------
+------ New session ------
+2017-11-13 20:01:03,250 [15] INFO  - e0e4c63f09534f01b14f577b4b398fe6
+2017-11-13 20:01:05,389 [15] INFO  - <xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid total_fee]]></return_msg>
+</xml>
+2017-11-13 20:01:05,390 [15] INFO  - 未将对象引用设置到对象的实例。
+2017-11-13 20:01:12,374 [10] INFO  - e0e4c63f09534f01b14f577b4b398fe6
+2017-11-13 20:01:13,448 [10] INFO  - <xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid total_fee]]></return_msg>
+</xml>
+2017-11-13 20:01:13,449 [10] INFO  - 未将对象引用设置到对象的实例。
+2017-11-13 20:01:14,665 [10] INFO  - e0e4c63f09534f01b14f577b4b398fe6
+2017-11-13 20:01:15,739 [10] INFO  - <xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid total_fee]]></return_msg>
+</xml>
+2017-11-13 20:01:15,739 [10] INFO  - 未将对象引用设置到对象的实例。
+2017-11-13 20:01:17,500 [11] INFO  - e0e4c63f09534f01b14f577b4b398fe6
+2017-11-13 20:01:18,556 [11] INFO  - <xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid total_fee]]></return_msg>
+</xml>
+2017-11-13 20:01:18,556 [11] INFO  - 未将对象引用设置到对象的实例。
+2017-11-13 20:02:04,559 [11] INFO  - e0e4c63f09534f01b14f577b4b398fe6
+2017-11-13 20:02:05,778 [11] INFO  - <xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid total_fee]]></return_msg>
+</xml>
+2017-11-13 20:02:05,778 [11] INFO  - 未将对象引用设置到对象的实例。
+2017-11-13 20:03:43,557 [11] INFO  - e0e4c63f09534f01b14f577b4b398fe6
+2017-11-13 20:03:45,104 [11] INFO  - <xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid total_fee]]></return_msg>
+</xml>
+2017-11-13 20:03:45,104 [11] INFO  - 未将对象引用设置到对象的实例。
+2017-11-13 20:04:09,717 [11] INFO  - e0e4c63f09534f01b14f577b4b398fe6
+2017-11-13 20:04:11,174 [11] INFO  - <xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid total_fee]]></return_msg>
+</xml>
+2017-11-13 20:04:11,175 [11] INFO  - 未将对象引用设置到对象的实例。
+2017-11-13 20:04:22,723 [23] INFO  - e0e4c63f09534f01b14f577b4b398fe6
+2017-11-13 20:04:23,921 [23] INFO  - <xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid total_fee]]></return_msg>
+</xml>
+2017-11-13 20:04:23,921 [23] INFO  - 未将对象引用设置到对象的实例。
+2017-11-13 20:04:48,496 [22] INFO  - e0e4c63f09534f01b14f577b4b398fe6
+2017-11-13 20:04:49,715 [22] INFO  - <xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid total_fee]]></return_msg>
+</xml>
+2017-11-13 20:04:49,715 [22] INFO  - 未将对象引用设置到对象的实例。
+2017-11-13 20:04:50,511 [23] INFO  - e0e4c63f09534f01b14f577b4b398fe6
+2017-11-13 20:04:51,635 [23] INFO  - <xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid total_fee]]></return_msg>
+</xml>
+2017-11-13 20:04:51,635 [23] INFO  - 未将对象引用设置到对象的实例。
+2017-11-13 20:04:53,153 [11] INFO  - e0e4c63f09534f01b14f577b4b398fe6
+2017-11-13 20:04:54,207 [11] INFO  - <xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid total_fee]]></return_msg>
+</xml>
+2017-11-13 20:04:54,219 [11] INFO  - 未将对象引用设置到对象的实例。
+2017-11-13 20:04:57,025 [23] INFO  - e0e4c63f09534f01b14f577b4b398fe6
+2017-11-13 20:04:58,090 [23] INFO  - <xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid total_fee]]></return_msg>
+</xml>
+2017-11-13 20:04:58,091 [23] INFO  - 未将对象引用设置到对象的实例。
+2017-11-13 20:04:58,119 [23] INFO  - e0e4c63f09534f01b14f577b4b398fe6
+2017-11-13 20:04:59,189 [23] INFO  - <xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid total_fee]]></return_msg>
+</xml>
+2017-11-13 20:04:59,189 [23] INFO  - 未将对象引用设置到对象的实例。
+2017-11-13 20:05:01,291 [22] INFO  - e0e4c63f09534f01b14f577b4b398fe6
+2017-11-13 20:05:02,343 [22] INFO  - <xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid total_fee]]></return_msg>
+</xml>
+2017-11-13 20:05:02,343 [22] INFO  - 未将对象引用设置到对象的实例。
+2017-11-13 20:05:02,372 [22] INFO  - e0e4c63f09534f01b14f577b4b398fe6
+2017-11-13 20:05:03,426 [22] INFO  - <xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid total_fee]]></return_msg>
+</xml>
+2017-11-13 20:05:03,426 [22] INFO  - 未将对象引用设置到对象的实例。
+2017-11-13 20:05:46,930 [11] INFO  - e0e4c63f09534f01b14f577b4b398fe6
+2017-11-13 20:05:48,138 [11] INFO  - <xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid total_fee]]></return_msg>
+</xml>
+2017-11-13 20:05:48,138 [11] INFO  - 未将对象引用设置到对象的实例。
+2017-11-13 20:05:50,128 [23] INFO  - e0e4c63f09534f01b14f577b4b398fe6
+2017-11-13 20:05:51,189 [23] INFO  - <xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid total_fee]]></return_msg>
+</xml>
+2017-11-13 20:05:51,190 [23] INFO  - 未将对象引用设置到对象的实例。
+2017-11-13 20:05:53,309 [11] INFO  - e0e4c63f09534f01b14f577b4b398fe6
+2017-11-13 20:05:54,367 [11] INFO  - <xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid total_fee]]></return_msg>
+</xml>
+2017-11-13 20:05:54,367 [11] INFO  - 未将对象引用设置到对象的实例。
+2017-11-13 20:06:00,686 [11] INFO  - e0e4c63f09534f01b14f577b4b398fe6
+2017-11-13 20:06:01,745 [11] INFO  - <xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid total_fee]]></return_msg>
+</xml>
+2017-11-13 20:06:01,745 [11] INFO  - 未将对象引用设置到对象的实例。
+2017-11-13 20:06:03,806 [11] INFO  - e0e4c63f09534f01b14f577b4b398fe6
+2017-11-13 20:06:04,074 [22] INFO  - e0e4c63f09534f01b14f577b4b398fe6
+2017-11-13 20:06:04,896 [23] INFO  - e0e4c63f09534f01b14f577b4b398fe6
+2017-11-13 20:06:05,170 [11] INFO  - <xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid total_fee]]></return_msg>
+</xml>
+2017-11-13 20:06:05,170 [11] INFO  - 未将对象引用设置到对象的实例。
+2017-11-13 20:06:05,914 [22] INFO  - <xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid total_fee]]></return_msg>
+</xml>
+2017-11-13 20:06:05,914 [22] INFO  - 未将对象引用设置到对象的实例。
+2017-11-13 20:06:05,974 [23] INFO  - <xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid total_fee]]></return_msg>
+</xml>
+2017-11-13 20:06:05,974 [23] INFO  - 未将对象引用设置到对象的实例。
+2017-11-13 20:07:17,952 [23] INFO  - e0e4c63f09534f01b14f577b4b398fe6
+2017-11-13 20:07:19,288 [23] INFO  - <xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid total_fee]]></return_msg>
+</xml>
+2017-11-13 20:07:19,288 [23] INFO  - 未将对象引用设置到对象的实例。
+2017-11-13 20:07:46,317 [22] INFO  - e0e4c63f09534f01b14f577b4b398fe6
+2017-11-13 20:07:52,126 [22] INFO  - <xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid total_fee]]></return_msg>
+</xml>
+2017-11-13 20:07:52,126 [22] INFO  - 未将对象引用设置到对象的实例。
+2017-11-13 20:07:55,830 [23] INFO  - e0e4c63f09534f01b14f577b4b398fe6
+2017-11-13 20:07:57,311 [23] INFO  - <xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid total_fee]]></return_msg>
+</xml>
+2017-11-13 20:07:57,311 [23] INFO  - 未将对象引用设置到对象的实例。
+------ End session ------
+------ New session ------
+2017-11-13 20:08:20,340 [22] INFO  - e0e4c63f09534f01b14f577b4b398fe6
+2017-11-13 20:08:24,987 [22] INFO  - <xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid total_fee]]></return_msg>
+</xml>
+2017-11-13 20:08:24,987 [22] INFO  - 未将对象引用设置到对象的实例。
+2017-11-13 20:08:40,522 [23] INFO  - e0e4c63f09534f01b14f577b4b398fe6
+2017-11-13 20:08:41,746 [23] INFO  - <xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid total_fee]]></return_msg>
+</xml>
+2017-11-13 20:08:41,746 [23] INFO  - 未将对象引用设置到对象的实例。
+2017-11-13 20:08:42,563 [22] INFO  - e0e4c63f09534f01b14f577b4b398fe6
+2017-11-13 20:08:43,202 [11] INFO  - e0e4c63f09534f01b14f577b4b398fe6
+2017-11-13 20:08:43,617 [22] INFO  - <xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid total_fee]]></return_msg>
+</xml>
+2017-11-13 20:08:43,617 [22] INFO  - 未将对象引用设置到对象的实例。
+2017-11-13 20:08:43,929 [22] INFO  - e0e4c63f09534f01b14f577b4b398fe6
+2017-11-13 20:08:44,260 [11] INFO  - <xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid total_fee]]></return_msg>
+</xml>
+2017-11-13 20:08:44,260 [11] INFO  - 未将对象引用设置到对象的实例。
+2017-11-13 20:08:44,988 [22] INFO  - <xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid total_fee]]></return_msg>
+</xml>
+2017-11-13 20:08:44,988 [22] INFO  - 未将对象引用设置到对象的实例。
+------ End session ------
+------ New session ------
+2017-11-13 20:24:09,446 [19] INFO  - 40d4e38a6ddb4ce0916ea2c06b795e34
+2017-11-13 20:24:11,186 [19] INFO  - <xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid total_fee]]></return_msg>
+</xml>
+2017-11-13 20:24:11,187 [19] INFO  - 未将对象引用设置到对象的实例。
+------ End session ------
+------ New session ------
+2017-11-13 20:54:14,696 [11] INFO  - c5bfcf5f904142aeb16a7667e925e230
+2017-11-13 20:54:16,327 [11] INFO  - <xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid total_fee]]></return_msg>
+</xml>
+2017-11-13 20:54:16,327 [11] INFO  - 未将对象引用设置到对象的实例。

@@ -1,0 +1,7 @@
+------ New session ------
+2017-11-27 14:27:44,483 [7] INFO  - 9ca26db5045f475fbcb25e18024aefac
+2017-11-27 14:27:44,925 [7] INFO  - data:<xml><spbill_create_ip><![CDATA[::1]]></spbill_create_ip><notify_url><![CDATA[http://weixin.1000n.com/Pay/PayNotifyUrl]]></notify_url><out_trade_no><![CDATA[9ca26db5045f475fbcb25e18024aefac]]></out_trade_no><appid><![CDATA[wx9535283296d186c3]]></appid><total_fee>1</total_fee><nonce_str><![CDATA[3CEC51BFDD5A171D733DE2F3DA4BB826]]></nonce_str><sign><![CDATA[BBFA38806560B41FB0D899FB2830E8FE]]></sign><openid><![CDATA[89420bc0e4d44dc98ee6180de2e50add]]></openid><mch_id><![CDATA[1491518502]]></mch_id><trade_type><![CDATA[JSAPI]]></trade_type><body><![CDATA[千年教育充值订单]]></body></xml>
+2017-11-27 14:27:45,827 [7] INFO  - 统一支付接口:<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid spbill_create_ip]]></return_msg>
+</xml>
+2017-11-27 14:27:45,828 [7] INFO  - 未将对象引用设置到对象的实例。

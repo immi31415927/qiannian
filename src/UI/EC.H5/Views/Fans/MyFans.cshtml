@@ -1,0 +1,33 @@
+﻿@using EC.Entity.Enum
+@using EC.Libraries.Util
+@{
+    ViewBag.Title = "我的粉丝";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var gradeEnum = EnumUtil.GetJsonEnum(typeof(CustomerEnum.Grade));
+}
+@section HeadCss{
+    <link rel="stylesheet" href="@Url.Content("~/Theme/plugins/Pager/css/pager.css")" />
+}
+@section HeadJs{
+    <script src="@Url.Content("~/Theme/plugins/Pager/pager.js")"></script>
+    <script src="@Url.Content("~/Theme/plugins/Pager/customPager.js")"></script>
+    <script src="@Url.Content("~/Theme/js/UI/MyFansPager.js")"></script>
+    <script type="text/javascript">
+        $(function() {
+            myFansPager.control.url = '@Url.Action("MyFansQuery", "Fans")';
+            myFansPager.control.sendInfoUrl = '@Url.Action("SendInfo", "Fans")';
+            myFansPager.control.GradeEnum = eval(@gradeEnum);
+            myFansPager.handler.init();
+        });
+    </script>
+}
+
+<div class="topt mgz"></div>
+<div class="top mgz xi28 cen bai">
+    我的粉丝
+    <div class="topl"><a href="javascript:void(0);" onclick="window.history.go(-1);"><img src="@Url.Content("~/Theme/images/left.png")" align='absmiddle' style="margin-top:-4px"></a></div>
+</div>
+@Html.Action("FundShow", "Me")
+<div class="con5 mgz" id="divPager">
+    <ul id="divContent"></ul>
+</div>
