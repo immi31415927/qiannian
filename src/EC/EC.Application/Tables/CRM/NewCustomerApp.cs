@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace EC.Application.Tables.CRM
 {
+    using EC.Application.Tables.WeiXin;
     using EC.DataAccess.Bs;
     using EC.DataAccess.CRM;
     using EC.DataAccess.Fn;
@@ -14,6 +15,7 @@ namespace EC.Application.Tables.CRM
     using EC.Entity.Output.Fore;
     using EC.Entity.Parameter.Request.CRM;
     using EC.Entity.Parameter.Request.NewCRM;
+    using EC.Entity.Parameter.Request.WeiXin;
     using EC.Entity.Tables.CRM;
     using EC.Entity.Tables.Finance;
     using EC.Libraries.Core;
@@ -109,44 +111,69 @@ namespace EC.Application.Tables.CRM
 
                     //钱包
                     var walletAmount = item.Grade >= grade.Type ? referrer.Amount : referrer.Amount / 2;
-
-
                     if (item.Grade < grade.Type)
                     {
-                        #region 不满足
-                        var thatReferrerAll = GetReferrer(customers, new List<ParentIds>(), item.CustomerSysNo, 1);
+                        #region 不满足跳级查找所得50%
+                        var thatReferrerAll = GetReferrer(customers, new List<ParentIds>(), item.ReferrerSysNo, 1);
                         if (thatReferrerAll.Count > 0)
                         {
                             //batchUpgradeParentList, batchInertBonusLogList,weiXinTipList, 
                             var findCustomer = this.Find(thatReferrerAll, grade, item, item.Sort, item.Sort, 1);
-                            if (findCustomer != null) { 
+                            if (findCustomer != null)
+                            {
+                                //奖金人
+                                var batchUpgradeParent = new BatchUpgradeParent()
+                                {
+                                    CustomerSysNo = findCustomer.CustomerSysNo,
+                                    WalletAmount = walletAmount,
+                                    SettledBonus20 = 0,
+                                    SettledBonus30 = 0,
+                                    SettledBonus40 = 0,
+                                    SettledBonus50 = 0,
+                                    SettledBonus60 = 0,
+                                    SettledBonus70 = 0,
+                                    SettledBonus80 = 0,
+                                    SettledBonus90 = 0
+                                };
+                                batchUpgradeParentList.Add(batchUpgradeParent);
+                                //奖金日志
+                                var bonusLog = new FnBonusLog()
+                                {
+                                    CustomerSysNo = item.CustomerSysNo,
+                                    SourceSysNo = customer.SysNo,
+                                    SourceSerialNumber = "",
+                                    Amount = walletAmount,
+                                    Type = FnEnum.BonusLogType.代理奖励.GetHashCode(),
+                                    Remarks = string.Format("{0}贡献,升级类型：普通代理,钱包：{1}，升级基金：{2}", customer.RealName, customer.WalletAmount, customer.UpgradeFundAmount),
+                                    Status = FnEnum.BonusLogStatus.撤销.GetHashCode(),
+                                    CreatedDate = DateTime.Now
+                                };
+                                batchInertBonusLogList.Add(bonusLog);
+                                //微信提示
+                                var model = customers.FirstOrDefault(p => p.SysNo == item.CustomerSysNo);
+                                if (model != null)
+                                {
+                                    if (!string.IsNullOrWhiteSpace(model.OpenId))
+                                    {
+                                        weiXinTipList.Add(new WeiXinTip()
+                                        {
+                                            OpenId = model.OpenId,
+                                            Keyword1 = walletAmount.ToString() + "元",
+                                            Keyword2 = walletAmount.ToString() + "元",
+                                            Remark = string.Format("业绩来源：{0}", customer.RealName)
+                                        });
+                                    }
+                                }
                             }
                         }
-                        //50%待结算
-                        var batchUpgradeParent = new BatchUpgradeParent()
-                        {
-                            CustomerSysNo = item.CustomerSysNo,
-                            WalletAmount = walletAmount,
-                            SettledBonus20 = 0,
-                            SettledBonus30 = 0,
-                            SettledBonus40 = 0,
-                            SettledBonus50 = 0,
-                            SettledBonus60 = 0,
-                            SettledBonus70 = 0,
-                            SettledBonus80 = 0,
-                            SettledBonus90 = 0
-                        };
-                        SettledBonus(batchUpgradeParent, grade.Type, walletAmount);
-                        batchUpgradeParentList.Add(batchUpgradeParent);
                         #endregion
-                    }
-                    else
-                    {
-                        #region 满足
-                        var batchUpgradeParent = new BatchUpgradeParent()
+
+                        #region 当前会员所得50%
+                        //奖金人
+                        var _batchUpgradeParent = new BatchUpgradeParent()
                         {
                             CustomerSysNo = item.CustomerSysNo,
-                            WalletAmount = walletAmount,
+                            WalletAmount = 0,
                             SettledBonus20 = 0,
                             SettledBonus30 = 0,
                             SettledBonus40 = 0,
@@ -157,12 +184,139 @@ namespace EC.Application.Tables.CRM
                             SettledBonus90 = 0
                         };
 
+                        SettledBonus(_batchUpgradeParent, nestGrade, walletAmount);
+
+                        batchUpgradeParentList.Add(_batchUpgradeParent);
+                        //奖金日志
+                        var _bonusLog = new FnBonusLog()
+                        {
+                            CustomerSysNo = item.CustomerSysNo,
+                            SourceSysNo = customer.SysNo,
+                            SourceSerialNumber = "",
+                            Amount = walletAmount,
+                            Type = FnEnum.BonusLogType.代理奖励.GetHashCode(),
+                            Remarks = string.Format("{0}贡献,升级类型：普通代理,钱包：{1}，升级基金：{2}", customer.RealName, customer.WalletAmount, customer.UpgradeFundAmount),
+                            Status = FnEnum.BonusLogStatus.撤销.GetHashCode(),
+                            CreatedDate = DateTime.Now
+                        };
+                        batchInertBonusLogList.Add(_bonusLog);
+                        //微信提示
+                        var _model = customers.FirstOrDefault(p => p.SysNo == item.CustomerSysNo);
+                        if (_model != null)
+                        {
+                            if (!string.IsNullOrWhiteSpace(_model.OpenId))
+                            {
+                                weiXinTipList.Add(new WeiXinTip()
+                                {
+                                    OpenId = _model.OpenId,
+                                    Keyword1 = walletAmount.ToString() + "元",
+                                    Keyword2 = walletAmount.ToString() + "元",
+                                    Remark = string.Format("业绩来源：{0}", item.RealName)
+                                });
+                            }
+                        }
+                        #endregion
+                    }
+                    else
+                    {
+                        #region 满足所有100%
+                        //奖金人
+                        var batchUpgradeParent = new BatchUpgradeParent()
+                        {
+                            CustomerSysNo = item.CustomerSysNo,
+                            WalletAmount = walletAmount,
+                            SettledBonus20 = 0,
+                            SettledBonus30 = 0,
+                            SettledBonus40 = 0,
+                            SettledBonus50 = 0,
+                            SettledBonus60 = 0,
+                            SettledBonus70 = 0,
+                            SettledBonus80 = 0,
+                            SettledBonus90 = 0
+                        };
                         batchUpgradeParentList.Add(batchUpgradeParent);
+                        //奖金日志
+                        var bonusLog = new FnBonusLog()
+                        {
+                            CustomerSysNo = item.CustomerSysNo,
+                            SourceSysNo = customer.SysNo,
+                            SourceSerialNumber = "",
+                            Amount = walletAmount,
+                            Type = FnEnum.BonusLogType.代理奖励.GetHashCode(),
+                            Remarks = string.Format("{0}贡献,升级类型：普通代理,钱包：{1}，升级基金：{2}", customer.RealName, customer.WalletAmount, customer.UpgradeFundAmount),
+                            Status = FnEnum.BonusLogStatus.撤销.GetHashCode(),
+                            CreatedDate = DateTime.Now
+                        };
+                        batchInertBonusLogList.Add(bonusLog);
+                        //微信提示
+                        var model = customers.FirstOrDefault(p => p.SysNo == item.CustomerSysNo);
+                        if (model != null)
+                        {
+                            if (!string.IsNullOrWhiteSpace(model.OpenId))
+                            {
+                                weiXinTipList.Add(new WeiXinTip()
+                                {
+                                    OpenId = model.OpenId,
+                                    Keyword1 = walletAmount.ToString() + "元",
+                                    Keyword2 = walletAmount.ToString() + "元",
+                                    Remark = string.Format("业绩来源：{0}", customer.RealName)
+                                });
+                            }
+                        }
                         #endregion
                     }
                 }
                 #endregion
-                
+
+                if (batchUpgradeParentList != null && batchUpgradeParentList.Any())
+                {
+                    if (Using<ICrCustomer>().BatchUpdate(batchUpgradeParentList) <= 0)
+                    {
+                        throw new Exception("批量更新推荐人奖金失败!");
+                    }
+                }
+
+                if (batchInertBonusLogList != null && batchInertBonusLogList.Any())
+                {
+                    if (Using<IFnBonusLog>().BatchInsert(batchInertBonusLogList) <= 0)
+                    {
+                        throw new Exception("批量添加推荐人奖金日志失败!");
+                    }
+                }
+
+                //将结算奖金写入钱包
+                if (Using<ICrCustomer>().UpdateGeneralBonus(new CrCustomer() { SysNo = customer.SysNo }) <= 0)
+                {
+                    throw new Exception("更新结算奖金失败!");
+                }
+                //如果过期时间为空则添加一年有效期
+                if (string.IsNullOrWhiteSpace(customer.ExpiresTime))
+                {
+                    customer.ExpiresTime = DateTime.Now.AddYears(1).ToString("yyyy-MM-dd");
+                    if (Using<ICrCustomer>().UpdateExpiresTime(customer) <= 0)
+                    {
+                        throw new Exception("更新过期时间失败!");
+                    }
+                }
+
+                foreach (var p in weiXinTipList)
+                {
+                    WeiXinApp.Instance.SendMessage(new SendMessageRequest()
+                    {
+                        WeiXinAppId = "wx9535283296d186c3",
+                        WeiXinAppSecret = "543e75c11909f438c02870ecbab85f5d",
+                        OpenId = p.OpenId,
+                        TemplateId = "a8oNldLv7Nlvbkajt6vQbWUBOgmu7EWW2j08UzdQgBg",
+                        Data = new
+                        {
+                            first = new { color = "#000000", value = "您有一笔新的分红奖金到账啦！" },
+                            keyword1 = new { color = "#000000", value = p.Keyword1 },
+                            keyword2 = new { color = "#000000", value = p.Keyword2 },
+                            remark = new { color = "#000000", value = p.Remark }
+                        },
+                        Url = "#"
+                    });
+                }
             }
             catch (Exception ex) {
                 result.Message = ex.Message;
