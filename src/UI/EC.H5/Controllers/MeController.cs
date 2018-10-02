@@ -539,101 +539,30 @@ namespace EC.H5.Controllers
                 return View("Error", new JResult() { Message = "扩展会员不存在﹗" });
             }
 
-            var gradeJsonStr = CodeApp.Instance.GetByType(EC.Entity.Enum.CodeEnum.CodeTypeEnum.会员等级信息.GetHashCode()).Value;
-            if (string.IsNullOrEmpty(gradeJsonStr))
-            {
-                return View("Error", new JResult() { Message = "请设置会员等级﹗" });
+            var upgradeGrade = customer.Grade + Step.步长.GetHashCode();
+
+
+            var nextGrade = (CustomerEnum.NewGrade)upgradeGrade;
+
+            var code = CodeApp.Instance.GetByType(EC.Entity.Enum.CodeEnum.CodeTypeEnum.会员等级信息.GetHashCode());
+            if (code != null) {
+                var grades = code.Value.ToObject<List<Grade>>();
+
+                var grade = grades.FirstOrDefault(p => p.Type == upgradeGrade);
+                if (grade != null) {
+                    ViewBag.UpgradeAmount = grade.Amount.ToString("#0.00");
+                    if (customer.UpgradeFundAmount > grade.Amount)
+                    {
+                        ViewBag.PayAmount = 0.ToString("#0.00"); 
+                    }
+                    else {
+                        ViewBag.PayAmount = (grade.Amount - customer.UpgradeFundAmount).ToString("#0.00"); 
+                    }
+                    
+                }
             }
-            //会员等级序列化
-            var grades = gradeJsonStr.ToObject<List<GradeView>>();
-            if (grades == null || !grades.Any())
-            {
-                return View("Error", new JResult() { Message = "请设置会员等级﹗" });
-            }
-            //当前会员等级
-            var currentGrade = grades.FirstOrDefault(p => p.Type == (customer.Grade + Step.步长.GetHashCode()));
-            if (currentGrade == null)
-            {
-                throw new Exception("获取会员等级失败！");
-            }
 
-            ViewBag.currentGrade = currentGrade;
-            //var gradeList = EnumUtil.ToDictionary(typeof(CustomerEnum.Grade));
-            //if (customer.Grade.Equals(CustomerEnum.Grade.普通会员.GetHashCode()))
-            //{
-            //    gradeList.Remove(CustomerEnum.Grade.普通会员.GetHashCode());
-            //    //gradeList.Remove(CustomerEnum.Grade.普通代理.GetHashCode());
-            //    gradeList.Remove(CustomerEnum.Grade.区域代理.GetHashCode());
-            //    gradeList.Remove(CustomerEnum.Grade.全国代理.GetHashCode());
-            //    gradeList.Remove(CustomerEnum.Grade.股东.GetHashCode());
-            //}
-            //else if (customer.Grade.Equals(CustomerEnum.Grade.普通代理.GetHashCode()))
-            //{
-            //    gradeList.Remove(CustomerEnum.Grade.普通会员.GetHashCode());
-            //    gradeList.Remove(CustomerEnum.Grade.普通代理.GetHashCode());
-            //    //gradeList.Remove(CustomerEnum.Grade.区域代理.GetHashCode());
-            //    gradeList.Remove(CustomerEnum.Grade.全国代理.GetHashCode());
-            //    gradeList.Remove(CustomerEnum.Grade.股东.GetHashCode());
-            //}
-            //else if (customer.Grade.Equals(CustomerEnum.Grade.区域代理.GetHashCode()))
-            //{
-            //    gradeList.Remove(CustomerEnum.Grade.普通会员.GetHashCode());
-            //    gradeList.Remove(CustomerEnum.Grade.普通代理.GetHashCode());
-            //    gradeList.Remove(CustomerEnum.Grade.区域代理.GetHashCode());
-            //    //gradeList.Remove(CustomerEnum.Grade.全国代理.GetHashCode());
-            //    gradeList.Remove(CustomerEnum.Grade.股东.GetHashCode());
-            //}
-            //else if (customer.Grade.Equals(CustomerEnum.Grade.全国代理.GetHashCode()))
-            //{
-            //    gradeList.Remove(CustomerEnum.Grade.普通会员.GetHashCode());
-            //    gradeList.Remove(CustomerEnum.Grade.普通代理.GetHashCode());
-            //    gradeList.Remove(CustomerEnum.Grade.区域代理.GetHashCode());
-            //    gradeList.Remove(CustomerEnum.Grade.全国代理.GetHashCode());
-            //    //gradeList.Remove(CustomerEnum.Grade.股东.GetHashCode());
-            //}
-
-            //ViewBag.gradeList = grades;
-            var dictionaryGrade = EnumUtil.ToDictionary(typeof(CustomerEnum.NewGrade));
-
-            ViewBag.dictionaryGrade = dictionaryGrade;
-
-
-            #region old
-            //var gradeList = EnumUtil.ToDictionary(typeof(CustomerEnum.Grade));
-            //if (customer.Grade.Equals(CustomerEnum.Grade.普通会员.GetHashCode()))
-            //{
-            //    gradeList.Remove(CustomerEnum.Grade.普通会员.GetHashCode());
-            //    //gradeList.Remove(CustomerEnum.Grade.普通代理.GetHashCode());
-            //    gradeList.Remove(CustomerEnum.Grade.区域代理.GetHashCode());
-            //    gradeList.Remove(CustomerEnum.Grade.全国代理.GetHashCode());
-            //    gradeList.Remove(CustomerEnum.Grade.股东.GetHashCode());
-            //}
-            //else if (customer.Grade.Equals(CustomerEnum.Grade.普通代理.GetHashCode()))
-            //{
-            //    gradeList.Remove(CustomerEnum.Grade.普通会员.GetHashCode());
-            //    gradeList.Remove(CustomerEnum.Grade.普通代理.GetHashCode());
-            //    //gradeList.Remove(CustomerEnum.Grade.区域代理.GetHashCode());
-            //    gradeList.Remove(CustomerEnum.Grade.全国代理.GetHashCode());
-            //    gradeList.Remove(CustomerEnum.Grade.股东.GetHashCode());
-            //}
-            //else if (customer.Grade.Equals(CustomerEnum.Grade.区域代理.GetHashCode()))
-            //{
-            //    gradeList.Remove(CustomerEnum.Grade.普通会员.GetHashCode());
-            //    gradeList.Remove(CustomerEnum.Grade.普通代理.GetHashCode());
-            //    gradeList.Remove(CustomerEnum.Grade.区域代理.GetHashCode());
-            //    //gradeList.Remove(CustomerEnum.Grade.全国代理.GetHashCode());
-            //    gradeList.Remove(CustomerEnum.Grade.股东.GetHashCode());
-            //}
-            //else if (customer.Grade.Equals(CustomerEnum.Grade.全国代理.GetHashCode()))
-            //{
-            //    gradeList.Remove(CustomerEnum.Grade.普通会员.GetHashCode());
-            //    gradeList.Remove(CustomerEnum.Grade.普通代理.GetHashCode());
-            //    gradeList.Remove(CustomerEnum.Grade.区域代理.GetHashCode());
-            //    gradeList.Remove(CustomerEnum.Grade.全国代理.GetHashCode());
-            //    //gradeList.Remove(CustomerEnum.Grade.股东.GetHashCode());
-            //}
-            //ViewBag.gradeList = gradeList;
-            #endregion
+            ViewBag.NextGrade = nextGrade;
 
             return View(customer);
         }
@@ -666,36 +595,24 @@ namespace EC.H5.Controllers
                 return Json(response, JsonRequestBehavior.AllowGet);
             }
 
-            //if (customer.Grade.Equals(request.SelectGrade))
-            //{
-            //    response.Message = string.Format("您已是{0}代理", (CustomerEnum.Grade)request.SelectGrade);
-            //    return Json(response, JsonRequestBehavior.AllowGet);
-            //}
+            var upgradeGrade = customer.Grade + Step.步长.GetHashCode();
 
-            var thatGrade = customer.Grade + Step.步长.GetHashCode();
-            if (!thatGrade.Equals(request.SelectGrade))
+            var code = CodeApp.Instance.GetByType(EC.Entity.Enum.CodeEnum.CodeTypeEnum.会员等级信息.GetHashCode());
+            if (code != null)
             {
-                response.Message = string.Format("您已是{0}代理", (CustomerEnum.Grade)request.SelectGrade);
-                return Json(response, JsonRequestBehavior.AllowGet);
-            }
+                var grades = code.Value.ToObject<List<Grade>>();
 
-            var upgradeComputeResponse = CustomerApp.Instance.UpgradeCompute(new UpgradeComputeRequest()
-            {
-                CustomerSysNo = customer.SysNo,
-                SelectGrade = request.SelectGrade
-            });
-
-            if (upgradeComputeResponse.Data == null)
-            {
-                response.Message = "升级基金计算错误!";
-                return Json(response, JsonRequestBehavior.AllowGet);
-            }
-            //验证升级基金
-            if (customer.UpgradeFundAmount < upgradeComputeResponse.Data.DeductedAmount)
-            {
-                response.StatusCode = ErrorEnum.余额不足.GetHashCode().ToString();
-                response.Message = "升级基金不足!";
-                return Json(response, JsonRequestBehavior.AllowGet);
+                var grade = grades.FirstOrDefault(p => p.Type == upgradeGrade);
+                if (grade != null)
+                {
+                    //验证升级基金
+                    if (customer.UpgradeFundAmount < grade.Amount)
+                    {
+                        response.StatusCode = ErrorEnum.余额不足.GetHashCode().ToString();
+                        response.Message = "升级基金不足!";
+                        return Json(response, JsonRequestBehavior.AllowGet);
+                    }
+                }
             }
 
             //response = NewCustomerApp.Instance.NewUpgrade(new NewUpgradeRequest()
@@ -752,17 +669,36 @@ namespace EC.H5.Controllers
                 response.Message = "用户已超时、请重新登录﹗";
                 return Json(response, JsonRequestBehavior.AllowGet);
             }
-
-            var upgradeComputeResponse = CustomerApp.Instance.UpgradeCompute(new UpgradeComputeRequest()
+            //获取会员
+            var customer = CustomerApp.Instance.Get(context.SysNo);
+            if (customer == null)
             {
-                CustomerSysNo = context.SysNo,
-                SelectGrade = request.SelectGrade
-            });
-
-            if (upgradeComputeResponse.Data == null)
-            {
-                response.Message = "升级基金计算错误!";
+                response.Message = "扩展会员不存在﹗";
                 return Json(response, JsonRequestBehavior.AllowGet);
+            }
+
+            var upgradeGrade = customer.Grade + Step.步长.GetHashCode();
+
+            decimal PayAmount = 0;
+
+            var code = CodeApp.Instance.GetByType(EC.Entity.Enum.CodeEnum.CodeTypeEnum.会员等级信息.GetHashCode());
+            if (code != null)
+            {
+                var grades = code.Value.ToObject<List<Grade>>();
+
+                var grade = grades.FirstOrDefault(p => p.Type == upgradeGrade);
+                if (grade != null)
+                {
+                    if (customer.UpgradeFundAmount > grade.Amount)
+                    {
+                        ViewBag.PayAmount = 0.ToString("#0.00");
+                    }
+                    else
+                    {
+                        PayAmount = grade.Amount - customer.UpgradeFundAmount;
+                    }
+                    
+                }
             }
 
 
@@ -784,8 +720,8 @@ namespace EC.H5.Controllers
             else {
                 recharge.OrderNo = orderNo;
                 recharge.CustomerSysNo = context.SysNo;
-                recharge.Amount = upgradeComputeResponse.Data.OnlinePaymentAmount;
-                recharge.Remarks = string.Format("用户:{0},升级金额:{1}", context.RealName, upgradeComputeResponse.Data.OnlinePaymentAmount);
+                recharge.Amount = PayAmount;
+                recharge.Remarks = string.Format("用户:{0},升级金额:{1}", context.RealName, PayAmount);
                 recharge.Status = PayStatus.未支付.GetHashCode();
                 recharge.Type = FnEnum.RechargeType.升级.GetHashCode();
                 recharge.CreatedDate = DateTime.Now;

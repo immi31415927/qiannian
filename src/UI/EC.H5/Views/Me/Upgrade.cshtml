@@ -3,7 +3,6 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-    var currentGrade = ViewBag.currentGrade as EC.Entity.View.CRM.GradeView;
 }
 <div class="topt mgz"></div>
 <div class="top mgz xi28 cen bai">
@@ -16,21 +15,20 @@
         <ul>
             <li>
                 <div class="con4l f xi24">当前级别</div>
-                <div class="con4m f xi20">@((CustomerEnum.Grade)Model.Grade)</div>
+                <div class="con4m f xi20">@((CustomerEnum.NewGrade)Model.Grade)</div>
             </li>
             <li>
                 <div class="con4l f xi24">下一级别</div>
-                <div class="con4m f xi20"><input type="hidden" name="grade" value="@(currentGrade.Type)" /> @(currentGrade.Name)
+                <div class="con4m f xi20">@ViewBag.NextGrade
                 </div>
             </li>
             <li>
                 <div class="con4l f xi24">扣费金额</div>
-                <div class="con4m f xi20 deductedAmount">0.00</div>
-                @*<a href="@Url.Action("Recharge", "Me")"><div class="con4rss r xi22 cen">基金充值</div></a>*@
+                <div class="con4m f xi20 deductedAmount">@ViewBag.UpgradeAmount</div>
             </li>
             <li>
                 <div class="con4l f xi24">在线支付</div>
-                <div class="con4m f xi20 onlinePaymentAmount">0.00</div>
+                <div class="con4m f xi20 onlinePaymentAmount">@ViewBag.PayAmount</div>
             </li>
         </ul>
     </div>
@@ -42,48 +40,13 @@
         $(function() {
             var form = $("#form");
 
-            $("select[name='grade']").change(function () {
-                UI.Loading();
-
-                var grade = $("select[name='grade']").find("option:selected").val();
-                $.post("@Url.Action("UpgradeCompute", "Me")", { selectGrade: grade }, function (res) {
-                    if (res.Status) {
-
-                        $(".deductedAmount").html(res.Data.DeductedAmount);
-                        $(".onlinePaymentAmount").html(res.Data.OnlinePaymentAmount);
-
-
-                        $("input[name='paymentamount']").val(res.Data.Amount);
-                        $("input[name='paymentamount']").attr('placeholder', res.Data.Amount + '元');
-                        $("a.tip").html(res.Data.Tips);
-                        UI.Hide();
-                    } else {
-                        $(".deductedAmount").html("0");
-                        $(".onlinePaymentAmount").html("");
-
-
-                        UI.Tips(res.Message);
-                        UI.Hide();
-                    }
-                });
-            });
 
             $("a.submit").click(function() {
 
-                var grade = $("input[name='grade']").val();
-
-                if ($.vailCenter.isNullOrEmptySpance(grade)) {
-                    UI.Tips("请选择代理级别");
-                    return false;
-                }
-
-                var data = {
-                    selectGrade: grade
-                };
-
                 UI.Loading();
 
-                $.post("@Url.Action("Upgrade", "Me")", data, function(res) {
+                $.post("@Url.Action("Upgrade", "Me")", null, function (res) {
+
                     if (res.Status) {
 
                         UI.Tips(res.Message);
@@ -101,7 +64,7 @@
                                 okBtnValue: "去充值",
                                 okCallBack: function() {
 
-                                    $.post("@Url.Action("UpgradeSaveRecharge", "Me")", { selectGrade: grade }, function(response) {
+                                    $.post("@Url.Action("UpgradeSaveRecharge", "Me")",null, function(response) {
                                         if (response.Status) {
                                             window.location.href = "/Pay/GoPayWeiXin/" + response.Data;
                                             UI.Hide();
