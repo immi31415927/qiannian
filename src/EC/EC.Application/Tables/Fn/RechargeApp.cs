@@ -22,6 +22,7 @@ namespace EC.Application.Tables.Fn
     using EC.Entity.Parameter.Request.WeiXin;
     using EC.Application.Tables.Bs;
     using EC.Entity.View.CRM;
+    using EC.Entity.Parameter.Request.NewCRM;
 
     /// <summary>
     /// 充值日志业务层
@@ -148,23 +149,25 @@ namespace EC.Application.Tables.Fn
                             throw new Exception("获取会员等级信息失败！");
                         }
 
-                        var gradeList = JsonUtil.ToObject<List<GradeView>>(code.Value);
-                        if (gradeList == null && !gradeList.Any())
+                        var upgradeGrade = customer.Grade + Step.步长.GetHashCode();
+
+                        var grades = JsonUtil.ToObject<List<Grade>>(code.Value);
+                        if (grades == null && !grades.Any())
                         {
                             throw new Exception("请设置会员等级信息！");
                         }
 
-                        var grade = gradeList.FirstOrDefault(p => p.Type.Equals(customer.Grade + 10));
+                        var grade = grades.FirstOrDefault(p => p.Type == upgradeGrade);
                         if (grade == null)
                         {
                             throw new Exception("请选择会员等级！");
                         }
 
-                        var UpgradeResult = CustomerApp.Instance.Upgrade(new UpgradeRequest()
+                        var UpgradeResult = NewCustomerApp.Instance.NewUpgrade(new NewUpgradeRequest()
                         {
                             CustomerSysNo = customer.SysNo,
-                            Amount = grade.Amount,
-                            SelectGrade = customer.Grade + 10
+                            //Amount = grade.Amount,
+                            //SelectGrade = customer.Grade + 10
                         });
 
                         if (!UpgradeResult.Status)
