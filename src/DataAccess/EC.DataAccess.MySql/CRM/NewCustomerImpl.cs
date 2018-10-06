@@ -60,5 +60,51 @@ namespace EC.DataAccess.MySql.CRM
             return DBContext.Sql(sqlStr.ToString())
                 .Execute();
         }
+
+
+        /// <summary>
+        /// 将待结算金额写入钱包
+        /// </summary>
+        public int UpdatePendingAmount(int sysNo, int grade)
+        {
+            var sql = "update crcustomer set ";
+            switch (grade)
+            {
+                case 20:
+                    sql += "WalletAmount=WalletAmount+SettledBonus20,SettledBonus20=0 ";
+                    break;
+                case 30:
+                    sql += "WalletAmount=WalletAmount+SettledBonus30,SettledBonus30=0 ";
+                    break;
+                case 40:
+                    sql += "WalletAmount=WalletAmount+SettledBonus40,SettledBonus40=0 ";
+                    break;
+                case 50:
+                    sql += "WalletAmount=WalletAmount+SettledBonus50,SettledBonus50=0 ";
+                    break;
+                case 60:
+                    sql += "WalletAmount=WalletAmount+SettledBonus60,SettledBonus60=0 ";
+                    break;
+                case 70:
+                    sql += "WalletAmount=WalletAmount+SettledBonus70,SettledBonus70=0 ";
+                    break;
+                case 80:
+                    sql += "WalletAmount=WalletAmount+SettledBonus80,SettledBonus80=0 ";
+                    break;
+                case 90:
+                    sql += "WalletAmount=WalletAmount+SettledBonus90,SettledBonus90=0 ";
+                    break;
+            }
+            sql += string.Format("where sysNo={1}",sysNo);
+            return DBContext.Sql(sql).Execute();
+        }
+
+        /// <summary>
+        /// 更新用户等级
+        /// </summary>
+        public int UpdateGrade(CrCustomer model)
+        {
+            return DBContext.Sql(string.Format("update crcustomer set Grade={1} where sysNo={2}", model.Grade, model.SysNo)).Execute();
+        }
     }
 }
