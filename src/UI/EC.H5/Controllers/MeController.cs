@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 using EC.Application.Tables.CRM;
+using EC.Entity.Parameter.Request.NewCRM;
 using EC.Application.Tables.Fn;
 using EC.Application.Tables.WeiXin;
 using EC.Entity;
@@ -615,12 +616,7 @@ namespace EC.H5.Controllers
                 }
             }
 
-            //response = NewCustomerApp.Instance.NewUpgrade(new NewUpgradeRequest()
-            //{
-            //    CustomerSysNo = customer.SysNo,
-            //    Amount = upgradeComputeResponse.Data.DeductedAmount,
-            //    UpgradeGrade = request.SelectGrade
-            //});
+            response = NewCustomerApp.Instance.NewUpgrade(new EC.Entity.Parameter.Request.NewCRM.NewUpgradeRequest() { CustomerSysNo = customer.SysNo });
             return Json(response, JsonRequestBehavior.AllowGet);
         }
 

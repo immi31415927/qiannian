@@ -145,7 +145,7 @@ namespace EC.Application.Tables.CRM
                                     //奖金日志
                                     var bonusLog = new FnBonusLog()
                                     {
-                                        CustomerSysNo = item.CustomerSysNo,
+                                        CustomerSysNo = findCustomer.CustomerSysNo,
                                         SourceSysNo = customer.SysNo,
                                         SourceSerialNumber = "",
                                         Amount = walletAmount,
@@ -296,11 +296,12 @@ namespace EC.Application.Tables.CRM
                     {
                         throw new Exception("更新结算奖金失败!");
                     }
-                    //更新等级
-                    if (Using<INewCustomer>().UpdateGrade(new CrCustomer()
+                    //更新等级和减去升级金额
+                    if (Using<INewCustomer>().UpdateGradeAndUpgradeFundAmount(new CrCustomer()
                     {
                         SysNo = customer.SysNo,
-                        Grade = nestGrade
+                        Grade = nestGrade,
+                        UpgradeFundAmount = customer.UpgradeFundAmount - grade.Amount
                     }) <= 0)
                     {
                         throw new Exception("更新级别失败!");

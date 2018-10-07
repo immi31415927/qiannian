@@ -43,6 +43,6 @@ namespace EC.DataAccess.CRM
         /// <summary>
         /// 更新用户等级
         /// </summary>
-        int UpdateGrade(CrCustomer model);
+        int UpdateGradeAndUpgradeFundAmount(CrCustomer model);
     }
 }
